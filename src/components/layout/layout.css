@@ -17,7 +17,7 @@ header {
 
 header > .inner {
   display: flex;
-  height: 120px;
+  height: 132px;
 }
 
 header .inner .logo .material-symbols-outlined {
@@ -29,13 +29,12 @@ header .inner .logo .material-symbols-outlined {
   margin: auto;
   font-size: 60px;
   color: #0b3b0b;
-  padding-top: 10px;
 }
 
 header .inner .logo .title {
   position: absolute;
-  top: 23px;
-  left: 435px;
+  top: 28px;
+  left: 440px;
   font-family: "Black Han Sans", sans-serif;
   font-size: 60px;
   color: #0b3b0b;
@@ -44,7 +43,7 @@ header .inner .logo .title {
 header .inner .sub-menu {
   display: flex;
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 0;
 }
 
@@ -86,7 +85,7 @@ header .inner .sub-menu ul.menu li a:hover {
 
 header .inner .main-menu {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   right: 0;
   z-index: 1;
   display: flex;

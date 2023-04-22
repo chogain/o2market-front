@@ -1,5 +1,5 @@
 // body 태그 아래 <header id="header"></header> 생성
-function Header() {
+export default function Header() {
   const header = document.querySelector("header");
 
   header.innerHTML = `
@@ -98,4 +98,3 @@ function Header() {
     </div>
 `;
 }
-Header();

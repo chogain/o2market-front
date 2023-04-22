@@ -1,5 +1,5 @@
 //최하단에 <footer id="footer"></footer> 생성
-function Footer() {
+export default function Footer() {
   const footer = document.querySelector("footer");
   footer.innerHTML = `
         <div class="inner">
