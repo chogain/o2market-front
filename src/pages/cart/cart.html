@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오이마켓 장바구니</title>
+
+  <!-- Google Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,200" />
+
+  <!---Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="./cart.css">
+  <link rel="stylesheet" href="../../styles/global.css">
+  <link rel="stylesheet" href="../../components/layout/layout.css">
+  <link rel="stylesheet" href="../../components/topbutton/topbutton.css">
+</head>
+
+<body>
+  <header id="header"></header>
+  <main>
+    <div class="width">
+      <div>
+        <h1 class="cart-text border-bottom">장바구니</h1>
+        <table>
+          <thead>
+            <tr>
+              <th class="cart-item" align="ceter">상품</th>
+              <th class="cart-price" align="center">가격</th>
+              <th class="cart-count" align="ceter">수량</th>
+              <th class="cart-total" align="right">합계</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cart-item" id="cartItem" align="ceter">
+                <div>
+                  <input type="checkbox" />
+                  <span>컬리플라워</span>
+                </div>
+                <div>
+                  <input type="checkbox" />
+                  <span>컬리플라워</span>
+                </div>
+                <div>
+                  <input type="checkbox" />
+                  <span>컬리플라워</span>
+                </div>
+              </td>
+              <td class="cart-price" id="cartPrice" align="center">
+                <div>10,000원</div>
+                <div>10,000원</div>
+                <div>10,000원</div>
+              </td>
+              <td class="cart-count" id="cartCount" align="center">
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+              </td>
+              <td class="cart-total" id="cartTotal" align="right">
+                <div>10,000원</div>
+                <div>10,000원</div>
+                <div>10,000원</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <label>
+            <input type="checkbox" id="allSelectCheckbox" checked />
+            <span class="all-select-text">전체선택</span>
+          </label>
+          <label class="delete-btn" id="partialDelete">
+            <span class="delete-btn-text">선택삭제</span>
+          </label>
+        </div>
+        <div id="summary-container">
+          <h3 class="order-check-text">
+            < 주문 내역 확인>
+          </h3>
+          <div class="cartSummary">
+            <dl>
+              <dt>상품금액</dt>
+              <dd id="itemPriceAll">10,000원</dd>
+              <dt>배송비</dt>
+              <dd>3,000</dd>
+              <dt>결제예정금액</dt>
+              <dd id="totalPrice">13,000원</dd>
+            </dl>
+            <button type="button" class="button bg-green btn-d" id="submitButton">
+              결제하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <a href="#Top" class="top-btn">TOP</a>
+  </main>
+  <footer id="footer"></footer>
+</body>
+
+</html>
+
+
+<script src="./cart.js"></script>
+<script src="../../components/layout/header.js"></script>
+<script src="../../components/layout/footer.js"></script>
+<script src="../../components/topbutton/topbuttn.js"></script>
