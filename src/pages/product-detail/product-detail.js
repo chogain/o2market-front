@@ -14,7 +14,7 @@ let count = parseInt(countEls[0].textContent);
 fetch("product.json")
   .then((res) => res.json())
   .then((datas) => {
-    // 원하는 데이터 할당
+    // 원하는 데이터 할당함
     const productInfo = datas.find((data) => data.productId === 1);
     inputAll(
       imgEls,
