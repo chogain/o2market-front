@@ -1,0 +1,92 @@
+[
+  {
+    "productId": 1,
+    "productName": "컬리플라워(50g)",
+    "description": "맛있는 컬리플라워",
+    "price": "3000",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "채소"
+  },
+  {
+    "productId": 2,
+    "productName": "오이(50g)",
+    "description": "맛있는 오이",
+    "price": "3000",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "채소"
+  },
+  {
+    "productId": 3,
+    "productName": "당근(50g)",
+    "description": "맛있는 당근",
+    "price": "6000",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "채소"
+  },
+  {
+    "productId": 4,
+    "productName": "가지(50g)",
+    "description": "맛있는 가지",
+    "price": "12000",
+    "imageUrl": "./src/assets/images/컬리플라워.jpg",
+    "company": "오이농장",
+    "categoryType": "채소"
+  },
+  {
+    "productId": 5,
+    "productName": "사과(50g)",
+    "description": "맛있는 사과",
+    "price": "5200",
+    "imageUrl": "./src/assets/images/컬리플라워.jpg",
+    "company": "오이농장",
+    "categoryType": "과일"
+  },
+  {
+    "productId": 6,
+    "productName": "딸기(50g)",
+    "description": "맛있는 딸기",
+    "price": "10400",
+    "imageUrl": "./src/assets/images/컬리플라워.jpg",
+    "company": "오이농장",
+    "categoryType": "과일"
+  },
+  {
+    "productId": 7,
+    "productName": "감(50g)",
+    "description": "맛있는 감",
+    "price": "3400",
+    "imageUrl": "./src/assets/images/컬리플라워.jpg",
+    "company": "오이농장",
+    "categoryType": "과일"
+  },
+  {
+    "productId": 8,
+    "productName": "양배추(50g)",
+    "description": "맛있는 양배추",
+    "price": "1000",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "채소"
+  },
+  {
+    "productId": 9,
+    "productName": "청포도(50g)",
+    "description": "맛있는 청포도",
+    "price": "12700",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "과일"
+  },
+  {
+    "productId": 10,
+    "productName": "복숭아(50g)",
+    "description": "맛있는 복숭아",
+    "price": "2200",
+    "imageUrl": "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/-U5pYO9QX3M",
+    "company": "오이농장",
+    "categoryType": "과일"
+  }
+]
