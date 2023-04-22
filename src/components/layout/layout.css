@@ -1,0 +1,217 @@
+/* header */
+
+.inner {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #f5fbef;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+header > .inner {
+  display: flex;
+  height: 132px;
+}
+
+header .inner .logo .material-symbols-outlined {
+  height: 75px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  font-size: 60px;
+  color: #0b3b0b;
+}
+
+header .inner .logo .title {
+  position: absolute;
+  top: 28px;
+  left: 440px;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 60px;
+  color: #0b3b0b;
+}
+
+header .inner .sub-menu {
+  display: flex;
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+
+header .inner .sub-menu ul.menu {
+  font-family: ARIAL, sans-serif;
+  display: flex;
+}
+
+header .inner .sub-menu ul.menu li {
+  position: relative;
+}
+
+header .inner .sub-menu ul.menu li::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+header .inner .sub-menu ul.menu li:first-child::before {
+  display: none;
+}
+
+header .inner .sub-menu ul.menu li a {
+  display: block;
+
+  font-size: 12px;
+  padding: 11px 16px;
+  color: #656565;
+}
+
+header .inner .sub-menu ul.menu li a:hover {
+  color: #000;
+}
+
+header .inner .main-menu {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  z-index: 1;
+  display: flex;
+}
+
+header .inner .main-menu .item {
+}
+
+header .inner .main-menu .item .item__name {
+  padding: 10px 20px 34px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+header .inner .main-menu .item:hover .item__name {
+  background-color: #292a0a;
+  color: #86b404;
+  border-radius: 6px 6px 0 0;
+}
+
+header .inner .main-menu .item .item__contents {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  display: none;
+}
+
+header .inner .main-menu .item:hover .item__contents {
+  display: block;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu {
+  background-color: #292a0a;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu > ul {
+  display: flex;
+  padding: 20px 0;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu > ul > li {
+  width: 220px;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu > ul > li h4 {
+  padding: 3px 0 12px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li {
+  padding: 5px 0;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+
+header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li:hover {
+  color: #86b404;
+}
+
+/* footer */
+footer {
+  border-top: 1px solid #c8c8c8;
+  background-color: #f5fbef;
+}
+
+footer .inner {
+  padding: 40px 0 60px;
+}
+
+footer .menu {
+  display: flex;
+  justify-content: center;
+}
+
+footer .menu li {
+  position: relative;
+}
+
+footer .menu li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background-color: #555;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  margin: auto;
+}
+
+footer .menu li:last-child::before {
+  display: none;
+}
+
+footer .menu li a {
+  display: block;
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 15px;
+}
+
+footer .menu li a.green {
+  color: #0b3b0b;
+}
+
+footer .info {
+  margin-top: 12px;
+  text-align: center;
+}
+
+footer .info span {
+  margin-right: 20px;
+  color: #999;
+  font-size: 12px;
+}
+
+footer .info span:last-child {
+  margin-right: 0;
+}
+
+footer .copyright {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
