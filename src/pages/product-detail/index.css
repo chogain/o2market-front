@@ -193,7 +193,7 @@ aside .cart-btn {
 
 .detail-tab {
   position: sticky;
-  top: 120px;
+  top: 131px;
   background-color: white;
   width: 100%;
   border-top: 1px solid #333;
@@ -231,6 +231,22 @@ aside .cart-btn {
   background-color: #333;
 }
 
+.bottom-text {
+  font-size: 20px;
+  font-weight: normal;
+  margin: 10px;
+}
+
+.review .review-text {
+  font-size: 15px;
+  margin: 0 0 20px 30px;
+  font-weight: normal;
+}
+
+table {
+  width: 100%;
+}
+
 .table tr * {
   padding: 10px 0;
 }
@@ -250,4 +266,9 @@ ol li {
   background-color: #0b3b0b;
   color: white;
   border: none;
+}
+
+.font {
+  color: rgb(124, 170, 44);
+  font-size: bold;
 }

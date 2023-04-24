@@ -177,3 +177,13 @@ body {
   background-color: transparent;
   color: #2a120adb;
 }
+
+.green-color {
+  color: rgb(124, 170, 44);
+}
+
+green-bg {
+  background-color: rgb(124, 170, 44);
+  color: white;
+  border: none;
+}
