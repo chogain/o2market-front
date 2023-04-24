@@ -5,10 +5,20 @@
   margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
+  padding: 40px 0;
   width: 1090px;
   margin: 0 auto;
-  height: 28rem;
+  height: 37rem;
   overflow: hidden;
+}
+
+#product-container .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 29px;
 }
 
 .carousel-wrapper {
@@ -72,4 +82,39 @@
   font-size: 16px;
   line-height: 1.5;
   font-weight: 800;
+}
+
+#product-container .prev,
+#product-container .next {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #fafafa;
+  border-radius: 50%;
+  position: absolute;
+  top: 868px;
+  z-index: 1;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#product-container .prev {
+  left: 50%;
+  margin-left: -558px;
+}
+
+#product-container .next {
+  right: 50%;
+  margin-right: -547px;
+}
+
+#product-container .prev:hover,
+#product-container .next:hover {
+  background-color: #fff;
+  color: #333;
 }

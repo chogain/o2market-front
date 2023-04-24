@@ -83,14 +83,13 @@ const products = [
 export default function ProductCard() {
   // #product-container 선택 후 js로 동적으로 내용 삽입
   const productTemplate = `
-    <div id="product-container">
+    <section id="product-container">
       <h2 class="title">이 상품 어때요?</h2>
       <div class="carousel-wrapper">
         <ul class="card-container slides">
       </div>
-    </div>
 
-    <div class="prev">
+       <div class="prev">
       <span class="material-symbols-outlined">
         chevron_left
       </span>
@@ -100,6 +99,9 @@ export default function ProductCard() {
         chevron_right
       </span>
     </div>
+    </section>
+
+   
   `;
 
   const productCardList = products.map(
@@ -125,21 +127,32 @@ function handleProductCarousel() {
   let prevBtn = document.querySelector(".prev");
   let nextBtn = document.querySelector(".next");
 
+  // 현재 슬라이드의 인덱스를 저장
   let currentIdx = 0;
+  // 슬라이드 개수
   let slideCount = slide.length;
-  let slideWidth = slide[0].clientWidth + 20; // 20은 margin값
+  // 요소의 너비 + margin
+  let slideWidth = slide[0].clientWidth + 20;
+  // 한번에 보여줄 슬라이드 개수
   let slideItems = 4;
+  // 현재 슬라이드가 속한 페이지를 저장
   let currentSlidePage = 1;
+  // 현재 페이지에서 보여지는 슬라이드의 개수를 저장
   let currentSlideCnt = slideItems;
+  // 전체 페이지 수를 저장
   let slidePage = parseInt(slideCount / slideItems);
-
+  // ul 요소의 너비를 전체 슬라이드의 너비 * 슬라이드 개수로 설정
   slides.style.width = slideWidth * slideCount + "px";
 
+  // 슬라이드를 이동시키는 함수를 정의
+  // num 인자를 받아 해당하는 위치로 슬라이드를 이동시키고, currentIdx 변수를 업데이트
   function moveSlide(num) {
     slides.style.left = -num * slideWidth + "px";
     currentIdx = num;
   }
 
+  // 다음 슬라이드로 이동하는 버튼에 click 이벤트 리스너를 추가
+  // 클릭할 때마다 currentSlidePage 변수를 1 증가
   nextBtn.addEventListener("click", () => {
     currentSlidePage++;
 
