@@ -100,3 +100,9 @@
 .product-price {
   font-size: 18px;
 }
+
+.nothing {
+  font-size: 25px;
+  text-align: center;
+  margin: 200px;
+}
