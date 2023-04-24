@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+    <!-- Google Material Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,200"
+    />
+    <!---Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+
+    <link rel="stylesheet" href="../../../styles/global.css" />
+    <link rel="stylesheet" href="../../../components/layout/layout.css" />
+
+    <script src="../../../components/layout/header.js"></script>
+
+    <link rel="stylesheet" href="index.css" />
+
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <header id="header"></header>
+    <div class="holeMyPageDiv">
+      <div class="myPageDiv">
+        <p id="headerTwo">
+          안녕하세요. &nbsp <span id="name"></span>님 &nbsp<button class="btn">
+            회원정보수정
+          </button>
+        </p>
+        <div class="myPageContainer">
+          <button class="pointBtn">
+            포인트
+            <span id="point"></span>
+          </button>
+          <button class="couponBtn">
+            쿠폰
+            <span id="coupon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="holeOrderDeliveryDiv">
+      <p id="headerFour">주문/배송 | 최근 1개월</p>
+      <div class="orderDeliveryDiv">
+        <div class="orderReceivedDiv">주문접수</div>
+        <div class="paymentCompletedDiv">주문중</div>
+        <div class="preparingForDeliveryDiv">배송준비중</div>
+        <div class="inDeliveryDiv">배송중</div>
+        <div class="deliveryCompleteDiv">배송완료</div>
+      </div>
+      <div class="holeOrderStateDiv">
+        <div id="orderStateDiv">
+          <h2 id="orderStateDivHeader">최근 주문내역이 없습니다.</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="holeReturnOfGoodsDiv">
+      <p id="headerFour">취소/반품/교환</p>
+      <div class="returnOfGoodsDiv">
+        <p id="headerTwo">최근 주문내역이 없습니다.</p>
+      </div>
+    </div>
+    <a href="#Top" class="top-btn">TOP</a>
+    <footer id="footer"></footer>
+  </body>
+  <script type="module" src="../../main/index.js"></script>
+</html>
+
+<!-- "orderNumber": "202304200001",
+          "orderDate": "2023-04-20",
+          "orderStatus": "배송중",
+          "product": "방울토마토",
+          "price": 20000 -->
+
+<!-- {
+            "orderNumber": "202304210003",
+            "orderDate": "2023-04-21",
+            "orderStatus": "주문접수",
+            "product": "사과",
+            "price": 10000
+          }, -->
