@@ -107,7 +107,7 @@
   margin: 15px 0;
 }
 
-.btn-d {
+.storage-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,7 +234,7 @@ aside .cart-btn {
 .bottom-text {
   font-size: 20px;
   font-weight: normal;
-  margin: 10px;
+  margin-top: 20px;
 }
 
 .review .review-text {
@@ -256,12 +256,6 @@ ol li {
   margin: 30px 0;
 }
 
-.bg-green {
-  background-color: rgb(124, 170, 44);
-  color: white;
-  border: none;
-}
-
 .bg-darkgreen {
   background-color: #0b3b0b;
   color: white;
@@ -271,4 +265,8 @@ ol li {
 .font {
   color: rgb(124, 170, 44);
   font-size: bold;
+}
+
+.pointer {
+  cursor: pointer;
 }
