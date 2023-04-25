@@ -36,6 +36,7 @@
   align-items: center;
   padding: 20px;
   border: 1px solid black;
+  border-radius: 10px; /* 모서리 둥글기 적용 */
 }
 
 #myPageDivHeader {
@@ -135,24 +136,42 @@
 
 #orderStateDiv {
   background-color: #638763;
-  width: 1120px;
-  height: 300px;
+  width: 600px;
+  min-height: 400px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 #orderStateDiv > div {
-  margin: 10px;
-  width: 150px;
-  height: 100px;
+  margin: 10px 10px;
+  min-width: 100px;
+  min-height: 50px;
   background-color: white;
   border: 1px solid black;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 10px;
+  border-radius: 10px;
+}
+
+#orderStateDiv > div button {
+  width: 100px;
+  margin-left: 20px;
+}
+
+#orderStateDiv > div .changeDiv {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#orderStateDiv > div .changeDiv label {
+  margin-right: 10px;
 }
 
 #orderStateDiv h2 {
@@ -189,7 +208,7 @@
 .returnOfGoodsDiv {
   background-color: #638763;
   width: 1120px;
-  height: 300px;
+  min-height: 300px; /* 최소 높이 300px */
   display: flex;
   justify-content: center;
   align-items: center;
