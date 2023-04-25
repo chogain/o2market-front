@@ -12,27 +12,31 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
+//http://localhost:5500/api/v1/products
 // json 데이터 불러오기
-fetch("product.json")
+fetch("http://localhost:5000/api/v1/products?category=1")
   .then((res) => res.json())
-  .then((datas) => {
-    insertData(datas);
-  });
+  .then((data) => {
+    // 처음 서버에 들어왔을 떄 insertData실행이 안됨
+    const reversedData = data.reverse();
+    console.log(reversedData);
+    insertData(reversedData);
+  })
+  .catch((error) => console.log(error));
 
-// 상품 생성하여 html에 삽입하는 함수
-function insertData(datas) {
+function insertData(data) {
   container.innerHTML = "";
-  countProduct.innerHTML = datas.length;
-  datas.forEach(({ productName, description, price, imageUrl }) => {
+  countProduct.innerHTML = data.length;
+  data.forEach(({ productName, price, imageUrl }) => {
     container.innerHTML += `
-    <article class="product pointer">
-      <div>
-        <img src="${imageUrl}" alt="${description}" />
-      </div>
-      <h3 class="product-name">${productName}</h3>
-      <p class="product-price">${addComma(price)}</p>
-    </article>
-  `;
+      <article class="product pointer">
+        <div>
+          <img src="${imageUrl}" alt="${productName}" />
+        </div>
+        <h3 class="product-name">${productName}</h3>
+        <p class="product-price">${addComma(price)}</p>
+      </article>
+    `;
   });
 }
 
