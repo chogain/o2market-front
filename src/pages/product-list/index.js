@@ -30,7 +30,7 @@ function insertData(datas) {
         <img src="${imageUrl}" alt="${description}" />
       </div>
       <h3 class="product-name">${productName}</h3>
-      <p class="product-price">${price}</p>
+      <p class="product-price">${addComma(price)}</p>
     </article>
   `;
   });
@@ -119,3 +119,8 @@ sortLowPrice.addEventListener("click", () =>
 sortABC.addEventListener("click", () =>
   sortData(sortABC, (a, b) => a.productName.localeCompare(b.productName)),
 );
+
+/* 가격에 ,(쉼표) 삽입 */
+function addComma(price) {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
