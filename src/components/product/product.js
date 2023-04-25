@@ -80,7 +80,15 @@ const products = [
   },
 ];
 
-export default function ProductCard() {
+async function getData() {
+  let response = await fetch("http://localhost:5500/api/v1/products");
+  let data = await response.json();
+  return data;
+}
+export default async function ProductCard() {
+  const productData = await getData();
+
+  console.log("productData: ", productData);
   // #product-container 선택 후 js로 동적으로 내용 삽입
   const productTemplate = `
     <section id="product-container">
@@ -104,12 +112,12 @@ export default function ProductCard() {
    
   `;
 
-  const productCardList = products.map(
+  const productCardList = productData.map(
     (product) =>
       `<li class="product">
         <a href="#">
-          <div><img src=${product.imageSrc} alt=${product.altText}></div>
-          <h3 class="product-name">${product.name}</h3>
+          <div><img src=${product.imageUrl} alt=${product.description}></div>
+          <h3 class="product-name">${product.productName}</h3>
           <p class="product-price">${product.price}</p>
         </a>
       </li>`,
