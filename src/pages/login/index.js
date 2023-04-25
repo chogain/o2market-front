@@ -1,23 +1,38 @@
-// 로그인 필수값 확인 함수
-function loginCheck() {
-  let inputId = document.getElementById("id").value;
-  let inputPassword = document.getElementById("password").value;
-  let emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 정규식...
+// 로그인에 필요한거 생각 이메일 비밀번호만 서버에 보내면
+// let email = document.getElementById("email");
+// let isValidEmail = false;
 
-  if (inputId.length === 0) {
-    alert("아이디를 입력하세요.");
-    return false;
-  } else if (!emailRegExp.test(inputId)) {
-    alert("이메일 형식이 올바르지 않습니다.");
-    return false;
-  } else if (inputPassword.length === 0) {
-    alert("비밀번호를 입력하세요.");
-    return false;
-  } else if (inputPassword.length < 6) {
-    alert("비밀번호를 6자리 이상 입력해주세요.");
-    return false;
-  } else {
-    document.getElementById("loginForm").submit();
-    alert(`${inputId}님 환영합니다.`);
-  }
+// 로그인 필수값 확인 함수
+function loginCheck(e) {
+  e.preventDefault();
+  const inputEmail = document.getElementById("email").value;
+  const inputPassword = document.getElementById("password").value;
+  const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 정규식…
+
+  fetch("http://localhost:5500/api/v1/users/signIn", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: inputEmail,
+      password: inputPassword,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // response body를 JSON으로 변환
+      } else {
+        throw new Error("Login failed"); // 에러 발생시키기
+      }
+    })
+    .then((data) => {
+      // 토큰을 로컬 스토리지에 저장
+      localStorage.setItem("token", data.token);
+      alert(`로그인 토큰:${data.token}`);
+    })
+    .catch((error) => {
+      console.error("Error logging in:", error);
+      alert(error);
+    });
 }
