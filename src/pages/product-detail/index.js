@@ -12,7 +12,7 @@ const totalPriceEls = document.querySelectorAll(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-fetch("http://localhost:5500/api/v1/products/64410645ad088180b3542f78")
+fetch("./product.json")
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -145,9 +145,4 @@ function PutSameValueinSameClass(elements, inputValue) {
   elements.forEach((El) => {
     El.innerHTML = inputValue;
   });
-}
-
-/* 가격에 ,(쉼표) 삽입 */
-function addComma(price) {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
