@@ -42,12 +42,12 @@
           <div class="cart-item total-price">합계</div>
           <section class="add-order"></section>
         </section>
-        <div>
+        <div class="btns">
           <label>
-            <input type="checkbox" id="allSelectCheckbox" checked />
-            <span class="all-select-text">전체선택</span>
+            <!-- <input type="checkbox" id="allSelectCheckbox" checked /> -->
+            <span class="all-select-text green-bg">전체선택해제</span>
           </label>
-          <label class="delete-btn" id="partialDelete">
+          <label class="delete-btn green-bg" id="partialDelete">
             <span class="delete-btn-text">선택삭제</span>
           </label>
         </div>
@@ -58,13 +58,13 @@
           <div class="cart-summary">
             <dl>
               <dt class="text">상품금액</dt>
-              <dd id="itemPriceAll" class="result-text"></dd>
+              <dd id="sum-all-items" class="result-text"></dd>
               <dt class="text">배송비</dt>
-              <dd class="result-text">3,000</dd>
+              <dd class="result-text">3,000원</dd>
               <dt class="text">결제예정금액</dt>
-              <dd id="totalPrice"></dd>
+              <dd id="total-price"></dd>
             </dl>
-            <button type="button" class="button btn-d" id="submitButton">
+            <button type="button" class="button green-bg" id="submitButton">
               결제하기
             </button>
           </div>
