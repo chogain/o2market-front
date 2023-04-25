@@ -10,7 +10,7 @@
   align-items: center;
   margin-bottom: 40px;
 }
-
+/* 시간 있으면 스케일로 설정 */
 .product-container img {
   object-fit: cover;
   height: 650px;
