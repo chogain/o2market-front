@@ -1,0 +1,65 @@
+.holeOrderCompleted {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.orderComleted {
+  background-color: rgb(171, 245, 170);
+  width: 450px;
+}
+
+#headerOne {
+  font-size: 2em;
+  margin-top: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+#orderSummary {
+  margin: 20px 10px; /* 위, 왼쪽, 아래, 오른쪽 */
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  background-color: #fff;
+}
+
+#orderSummary p {
+  margin: 0; /* 위, 오른쪽, 아래, 왼쪽 모두 0으로 */
+  font-weight: bold;
+}
+
+#orderSummary p:nth-child(2n + 1) {
+  text-align: left; /* 왼쪽으로 정렬 */
+}
+
+#productList {
+  margin: 20px 10px; /* 위, 왼쪽, 아래, 오른쪽 */
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#productList ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#productList li {
+  margin: 5px 0;
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+}
