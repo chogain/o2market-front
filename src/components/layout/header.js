@@ -4,10 +4,6 @@ export default function Header() {
   // <a href="/" class="title">오이마켓</a>
   header.innerHTML = `
     <div class="inner">
-      <h1 class="logo">
-        <span class="material-symbols-outlined">spo2</span>
-        <a href="/" class="title">O2마켓</a>
-      </h1>
       
       <ul class="main-menu">
         <li class="item">
@@ -90,6 +86,11 @@ export default function Header() {
           </div>
         </li>
       </ul>
+      
+      <h1 class="logo">
+        <span class="material-symbols-outlined">spo2</span>
+        <a href="/" class="title">O2마켓</a>
+      </h1>
 
       <div class="sub-menu">
         <ul class="menu">

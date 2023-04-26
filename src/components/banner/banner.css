@@ -1,7 +1,9 @@
 /* banner */
 
 .banner {
+  position: relative;
 }
+
 .banner .slide-container {
   display: flex;
   overflow: hidden;
@@ -48,7 +50,8 @@
   border: 2px solid #292a0a;
   border-radius: 50%;
   position: absolute;
-  top: 325px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
   outline: none;
@@ -78,7 +81,7 @@
   display: flex;
   gap: 5px;
   position: absolute;
-  top: 514px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
 }
