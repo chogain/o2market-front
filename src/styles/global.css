@@ -147,6 +147,7 @@ body {
   font-weight: 400;
   line-height: 1.4;
   font-family: "Nanum Gothic", sans-serif;
+  background-color: #fffef4;
 }
 
 .btn {
@@ -201,7 +202,7 @@ body {
 }
 
 .green-color {
-  color: rgb(124, 170, 44);
+  color: rgb(131, 180, 46);
 }
 
 .green-bg {

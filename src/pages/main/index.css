@@ -1,0 +1,94 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+.slogan {
+  background-color: #feffe8;
+  /* background-color: #f8faf1; */
+  height: 420px;
+  margin-top: 80px;
+}
+
+.slogan-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.slogan-image,
+.slogan-text {
+  width: 50%;
+}
+
+.slogan-text {
+  padding: 0 50px;
+  font-size: 30px;
+  word-break: keep-all;
+  text-align: center;
+  color: #365236;
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.slogan-text .scaleUp {
+  font-size: 54px;
+  color: #71ac3a;
+  line-height: 30px;
+}
+
+.slogan-text .green {
+  text-decoration: underline;
+  color: #90ce57;
+}
+
+.slogan-image {
+  padding-bottom: 36px;
+}
+.slogan-image p {
+  height: auto;
+  animation-name: float;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+.slogan-image p img {
+  width: 500px;
+}
+
+@keyframes float {
+  from {
+    transform: translate(0, 0px);
+  }
+  to {
+    transform: translate(0, 20px);
+  }
+}
+
+.slogan-image p::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 60%;
+  transform: translateX(-50%);
+  height: 16px;
+  filter: blur(6px);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  animation-name: shadow;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shadow {
+  from {
+    width: 60%;
+  }
+  to {
+    width: 40%;
+  }
+}

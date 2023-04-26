@@ -1,14 +1,18 @@
 /* banner */
 
 .banner {
+  position: relative;
+  width: 100%;
+  margin: 60px 0;
 }
+
 .banner .slide-container {
   display: flex;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: 1100px;
   max-height: 430px;
-  margin: 0px auto 40px;
+  margin: 0px auto;
 
   /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
   user-select: none;
@@ -26,7 +30,7 @@
   flex-shrink: 0;
   /* transition */
   transition: left 0.8s;
-  height: 500px;
+  height: 332px;
 }
 
 .banner-link {
@@ -37,18 +41,20 @@
 }
 
 .banner-img {
-  width: 100%;
+  width: 1100px;
   height: 100%;
+  object-fit: cover;
 }
 
 .banner .slide-prev,
 .banner .slide-next {
   width: 42px;
   height: 42px;
-  border: 2px solid #292a0a;
+  /* border: 2px solid #292a0a; */
   border-radius: 50%;
   position: absolute;
-  top: 325px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
   outline: none;
@@ -60,12 +66,13 @@
 
 .banner .slide-prev {
   left: 50%;
-  margin-left: -540px;
+  margin-left: -640px;
+  color: rgb(24, 87, 24);
 }
 
 .banner .slide-next {
   right: 50%;
-  margin-right: -540px;
+  margin-right: -640px;
 }
 
 .banner .slide-prev:hover,
@@ -78,12 +85,12 @@
   display: flex;
   gap: 5px;
   position: absolute;
-  top: 514px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
 }
 .slide-pagination > li {
-  color: #f5fbef;
+  color: #dbe9cd;
   cursor: pointer;
   font-size: 25px;
 }
