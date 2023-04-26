@@ -1,27 +1,13 @@
 // body 태그 아래 <header id="header"></header> 생성
 export default function Header() {
   const header = document.querySelector("header");
-
+  // <a href="/" class="title">오이마켓</a>
   header.innerHTML = `
     <div class="inner">
       <h1 class="logo">
-        <span class="material-symbols-outlined">spo2</span>
-        <a href="/" class="title">오이마켓</a>
+        <p class="material-symbols-outlined">spo2<span>마켓</span></p>
       </h1>
-      <div class="sub-menu">
-        <ul class="menu">
-          <li>
-            <a href="/signin">로그인</a>
-          </li>
-          <li>
-            <a href="/mypage">마이페이지</a>
-          </li>
-          <li>
-            <a href="/mycart">장바구니</a>
-          </li>
-        </ul>
-      </div>
-
+      
       <ul class="main-menu">
         <li class="item">
           <div class="item__name">채소</div>
@@ -95,6 +81,20 @@ export default function Header() {
           </div>
         </li>
       </ul>
+
+      <div class="sub-menu">
+        <ul class="menu">
+          <li>
+            <a href="/signin">로그인</a>
+          </li>
+          <li>
+            <a href="/mypage">마이페이지</a>
+          </li>
+          <li>
+            <a href="/mycart">장바구니</a>
+          </li>
+        </ul>
+      </div>
     </div>
 `;
 }
