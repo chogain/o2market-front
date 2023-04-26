@@ -5,7 +5,8 @@ export default function Header() {
   header.innerHTML = `
     <div class="inner">
       <h1 class="logo">
-        <p class="material-symbols-outlined">spo2<span>마켓</span></p>
+        <span class="material-symbols-outlined">spo2</span>
+        <a href="/" class="title">O2마켓</a>
       </h1>
       
       <ul class="main-menu">
@@ -32,11 +33,19 @@ export default function Header() {
                     <li>파프리카</li>
                     <li>가지</li>
                     <li>컬리플라워</li>
-
                   </ul>
                 </li>
                 <li>
                   <h4>뿌리채소</h4>
+                  <ul>
+                    <li>고구마</li>
+                    <li>당근</li>
+                    <li>무우</li>
+                    <li>콜라비</li>
+                  </ul>
+                </li>
+                <li>
+                  <h4>버섯</h4>
                   <ul>
                     <li>고구마</li>
                     <li>당근</li>
@@ -66,7 +75,7 @@ export default function Header() {
                   </ul>
                 </li>
                 <li>
-                  <h4>과일 가공품</h4>
+                  <h4>열대 과일</h4>
                   <ul>
                     <li>곶감</li>
                     <li>건망고</li>
