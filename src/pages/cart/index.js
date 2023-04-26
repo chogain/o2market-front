@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(orderItems);
     });
 
-    fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
+    fetch("http://localhost:5500/api/v1/orders/6447711f27c7db450be860ba", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
