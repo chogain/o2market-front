@@ -39,7 +39,7 @@
     <header id="header"></header>
     <div class="holeMemberFormDiv">
       <div class="memberFormDiv">
-        <h1 id="headerOne">오이마켓 로그인</h1>
+        <h1 id="headerOne">로그인</h1>
         <!-- 설명:action은 form의 data를 서버로 보낼 때 데이터가 도착할 URL주소 -->
         <form
           class="memberForm"
@@ -52,10 +52,8 @@
           <!-- 설명:input의 타입을 hidden으로 주면 화면에는 안보이지만 이 input은 있는 값임. 전송할때 name이
       mode 인것의 value가 login이면 ~~동작하게 사용할 수도 있음 -->
           <input type="hidden" name="mode" value="로그인" />
-          이메일
-          <input type="text" id="email" name="email" placeholder="abc123@example.com" />
-          비밀번호
-          <input type="password" id="password" name="password" placeholder="******" />
+          <input type="text" id="email" name="email" placeholder="  이메일을 입력해주세요"/>
+          <input type="password" id="password" name="password" placeholder="  비밀번호를 입력해주세요" />
           <input onclick="loginCheck(event)" type="submit" value="로그인" />
         </form>
         <!-- 설명:onclick="location.href=''"자리에는 회원가입 페이지 경로 적어주면됨 -->

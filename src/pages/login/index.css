@@ -1,7 +1,7 @@
 #headerOne {
   display: flex;
   justify-content: center;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   margin: 0.67em 0;
 }
@@ -9,11 +9,11 @@
 .holeMemberFormDiv {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin: 80px;
 }
 
 .memberFormDiv {
-  background-color: rgb(171, 245, 170);
+  margin: 90px;
   width: 450px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .memberFormDiv input {
-  margin: 10px 50px 10px 0px;
+  margin-bottom: 20px;
   height: 50px;
   width: 350px;
   border-radius: 5px;
@@ -32,8 +32,8 @@
 }
 
 .memberFormDiv input:last-child {
-  background-color: rgb(64, 187, 125);
-  margin-top: 20px;
+  background-color: #FEFEEA;
+  margin-bottom: 20px;
 }
 
 .memberForm {
@@ -41,10 +41,10 @@
 }
 
 .joinBtn {
-  margin: 0px 0px 10px 125px;
+  margin-left: 50px;
   height: 50px;
-  width: 200px;
+  width: 350px;
   border-radius: 5px;
   border: 0px;
-  background-color: rgb(209, 224, 245);
+  background-color: #7fab4dbb;
 }

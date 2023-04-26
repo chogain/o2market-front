@@ -170,6 +170,9 @@ header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li:h
 footer {
   border-top: 1px solid #b9c7a293;
   background-color: #f5fbef;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 footer .inner {
