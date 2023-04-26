@@ -1,6 +1,7 @@
-// 로그인에 필요한거 생각 이메일 비밀번호만 서버에 보내면
-// let email = document.getElementById("email");
-// let isValidEmail = false;
+const token = localStorage.getItem("token");
+const userId = localStorage.getItem("userId");
+
+// 로그인 토큰 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ3NzExZjI3YzdkYjQ1MGJlODYwYmEiLCJpYXQiOjE2ODI0Nzg0NDl9.YkNiLP6sUpRtDwTxjZjDTFCBvB_3aaExGiXzU3BFflo
 
 // 로그인 필수값 확인 함수
 // 로그인 필수값 확인 함수
@@ -26,6 +27,7 @@ function loginCheck(e) {
   fetch("http://localhost:5500/api/v1/users/signIn", {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${token}`, // 로그인 토큰
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -42,8 +44,15 @@ function loginCheck(e) {
     })
     .then((data) => {
       // 토큰을 로컬 스토리지에 저장
+      const userId = data.userId; // 서버에서 반환한 사용자 식별자 값
+      localStorage.setItem("userId", userId); // 로컬 스토리지에 저장
       localStorage.setItem("token", data.token);
+      localStorage.setItem("authorization", `Bearer ${token}`);
+      // alert(userId);
+      window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
       // alert(`로그인 토큰:${data.token}`);
+      // alert(data._id);
+      // console.log(data.token);
     })
     .catch((error) => {
       console.error("Error logging in:", error);
