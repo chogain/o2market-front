@@ -12,168 +12,115 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
-if (window.location.href == "http://localhost:5500/api/v1/products") {
-  fetch("http://localhost:5500/api/v1/products")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((item) => {
-        console.log(Object.keys(data).length);
-        if (!data.length) {
-          container.innerHTML = "해당하는 상품이 없습니다.";
-        }
-        container.insertAdjacentHTML(
-          "beforeend",
-          `<article class="product pointer">
-          <div>
-            <img src="${item.imageUrl}" alt="${item.productName}" />
-          </div>
-          <h3 class="product-name">${item.productName}</h3>
-          <p class="product-price">${addComma(parseInt(item.price))}</p>
-        </article>
-      `,
-        );
-        countProduct.innerHTML = container.childElementCount;
+// json 데이터 불러오기
+fetch("http://localhost:5500/api/v1/products")
+  .then((res) => res.json())
+  .then((datas) => {
+    insertData(datas);
+  });
+
+// 상품 생성하여 html에 삽입하는 함수
+function insertData(datas) {
+  container.innerHTML = "";
+  countProduct.innerHTML = datas.length;
+  datas.forEach(({ productName, price, imageUrl }) => {
+    container.innerHTML += `
+    <article class="product pointer">
+      <div>
+        <img src="${imageUrl}" alt="${productName}" />
+      </div>
+      <h3 class="product-name">${productName}</h3>
+      <p class="product-price">${addComma(price)}</p>
+    </article>
+  `;
+  });
+}
+
+// 클릭한 버튼 css 토글하는 함수
+function toggleClass(findhaveClass, El, willtoggledClass) {
+  $(findhaveClass).classList.remove(willtoggledClass);
+  El.classList.add(willtoggledClass);
+}
+
+// 카테고리 필터해서 필터된 데이터 반환하는 함수
+function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
+  button.addEventListener("click", () => {
+    toggleClass(findhaveClass, El, willtoggledClass);
+
+    fetch("http://localhost:5500/api/v1/products")
+      .then((res) => res.json())
+      .then((datas) => {
+        container.innerHTML = "";
+        const dataBox = datas.filter((data) => {
+          return data.category === category;
+        });
+        return insertData(dataBox);
       });
-    });
-} else if (window.location.href == "http://localhost:5500/api/v1/products?category=1") {
-  fetch("http://localhost:5500/api/v1/products?category=1")
+  });
+}
+
+// 카테고리 찾아 필터된 데이터 리턴하는 함수
+function categoryData(category) {
+  return fetch("http://localhost:5500/api/v1/products")
     .then((res) => res.json())
-    .then((data) => {
-      data.forEach((item) => {
-        console.log(Object.keys(data).length);
-        if (!data.length) {
-          container.innerHTML = "해당하는 상품이 없습니다.";
-        }
-        container.insertAdjacentHTML(
-          "beforeend",
-          `<article class="product pointer">
-          <div>
-            <img src="${item.imageUrl}" alt="${item.productName}" />
-          </div>
-          <h3 class="product-name">${item.productName}</h3>
-          <p class="product-price">${addComma(parseInt(item.price))}</p>
-        </article>
-      `,
-        );
-        countProduct.innerHTML = container.childElementCount;
+    .then((datas) => {
+      const dataBox = datas.filter((data) => {
+        return data.category === category;
       });
-    });
-} else if (
-  (window.location.href == window.location.href) ==
-  "http://localhost:5500/api/v1/products?category=1"
-) {
-  fetch("http://localhost:5500/api/v1/products?category=2")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((item) => {
-        console.log(Object.keys(data).length);
-        if (!data.length) {
-          container.innerHTML = "해당하는 상품이 없습니다.";
-        }
-        container.insertAdjacentHTML(
-          "beforeend",
-          `<article class="product pointer">
-        <div>
-          <img src="${item.imageUrl}" alt="${item.productName}" />
-        </div>
-        <h3 class="product-name">${item.productName}</h3>
-        <p class="product-price">${addComma(parseInt(item.price))}</p>
-      </article>
-    `,
-        );
-        countProduct.innerHTML = container.childElementCount;
-      });
+      return dataBox;
     });
 }
-filterVegetable.addEventListener("click", () => {
-  // 새로운 CSS 파일 경로
-  var cssFilePath = "./index.css";
-ß
-  // 새로운 페이지로 이동
-  location.href = "http://localhost:5500/api/v1/products?category=1";
 
-  // 새로운 페이지에서도 사용할 CSS 파일 로드
-  var head = document.getElementsByTagName("head")[0];
-  var link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = cssFilePath;
-  head.appendChild(link);
+// 전체버튼 클릭시 이벤트 등록
+fetch("http://localhost:5500/api/v1/products")
+  .then((res) => res.json())
+  .then((datas) =>
+    filterTotal.addEventListener("click", () => {
+      toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
+      insertData(datas);
+    }),
+  );
 
-  fetch("http://localhost:5500/api/v1/products?category=1")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
-});
+// 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록
+categoryFilter(filterVegetable, 1, ".bg-darkgreen", filterVegetable, "bg-darkgreen");
+categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
 
-// 새로운 CSS 파일 경로
-var cssFilePath = "./index.css";
+async function findCategory() {
+  let dataBox;
+  if (filterTotal.classList.contains("bg-darkgreen")) {
+    const res = await fetch("http://localhost:5500/api/v1/products");
+    const datas = await res.json();
+    dataBox = datas;
+  } else if (filterVegetable.classList.contains("bg-darkgreen")) {
+    dataBox = await categoryData(1);
+  } else if (filterFruit.classList.contains("bg-darkgreen")) {
+    dataBox = await categoryData(2);
+  }
+  return dataBox;
+}
 
-// 새로운 페이지로 이동
-location.href = "http://localhost:5500/api/v1/products?category=1";
+// 정렬 방식 클릭 시 카테고리 확인 후 해당하는 데이터만 정렬하는 이벤트 등록
+const sortData = async (sortedTag, sortFunc) => {
+  toggleClass(".font", sortedTag, "font");
+  const foundCategory = await findCategory();
+  const sortedData = foundCategory.sort(sortFunc);
+  insertData(sortedData);
+};
 
-// 새로운 페이지에서도 사용할 CSS 파일 로드
-var head = document.getElementsByTagName("head")[0];
-var link = document.createElement("link");
-link.rel = "stylesheet";
-link.type = "text/css";
-link.href = cssFilePath;
-head.appendChild(link);
+sortNew.addEventListener("click", () =>
+  sortData(sortNew, (a, b) => b.productId - a.productId),
+);
+sortHighPrice.addEventListener("click", () =>
+  sortData(sortHighPrice, (a, b) => b.price - a.price),
+);
+sortLowPrice.addEventListener("click", () =>
+  sortData(sortLowPrice, (a, b) => a.price - b.price),
+);
+sortABC.addEventListener("click", () =>
+  sortData(sortABC, (a, b) => a.productName.localeCompare(b.productName)),
+);
 
 /* 가격에 ,(쉼표) 삽입 */
 function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function getProductList(apiUrl) {
-  return fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      let html = "";
-      data.forEach((item) => {
-        html += `<div>${item.name} - ${item.price}</div>`;
-      });
-      return html;
-    });
-}
-
-const allButton = document.getElementById("allButton");
-const vegetableButton = document.getElementById("vegetableButton");
-const fruitButton = document.getElementById("fruitButton");
-const productListDiv = document.getElementById("productList");
-
-filterTotal.addEventListener("click", () => {
-  const apiUrl = "http://product";
-
-  getProductList(apiUrl).then((html) => {
-    productListDiv.innerHTML = html;
-  });
-});
-
-filterVegetable.addEventListener("click", () => {
-  const apiUrl = "http://product?category=1";
-
-  getProductList(apiUrl).then((html) => {
-    productListDiv.innerHTML = html;
-  });
-});
-
-filterFruit.addEventListener("click", () => {
-  const apiUrl = "http://product?category=2";
-
-  getProductList(apiUrl).then((html) => {
-    productListDiv.innerHTML = html;
-  });
-});
-
-if (filterFruit === "http://localhost:5500/api/v1/products") {
-  fetch("http://localhost:5500/api/v1/products")
-    .then((reponse) => response.json())
-    .then((datas) => {});
-}
-
-async function productList() {
-  const container = $("#productContainer");
-  const products = await 
 }

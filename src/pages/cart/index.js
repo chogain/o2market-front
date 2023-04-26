@@ -1,14 +1,18 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
-let resultPrice = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = document.querySelector(".add-order");
-
+  let resultPrice = 0;
   for (let i = 0; i < localStorage.length; i++) {
-    const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    const totalPrice = cartItem.price * cartItem.count;
-    const itemHtml = `
+    try {
+      const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (!cartItem.productName) {
+        return false;
+      }
+      itemContainer.insertAdjacentHTML(
+        "beforeend",
+        `
       <article class="add-cart">
         <input type="checkbox" class="checking" checked />
         <span class="product">${cartItem.productName}(${cartItem.productId})</span>
@@ -18,40 +22,76 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="count">${cartItem.count}</p>
           <div class="plus">+</div>
         </div>
-        <span class="total-price">${addComma(totalPrice)}원</span>
-      </article>`;
-    itemContainer.insertAdjacentHTML("beforeend", itemHtml);
-    resultPrice += totalPrice;
+        <span class="total-price">${addComma(cartItem.price * cartItem.count)}원</span>
+      </article>`,
+      );
+      resultPrice += cartItem.price * cartItem.count;
+    } catch (error) {
+      continue;
+    }
   }
 
-  const sumAllItems = document.querySelector("#sum-all-items");
-  const totalprice = document.querySelector("#total-price");
-  sumAllItems.innerHTML = `${addComma(resultPrice)}원`;
-  totalprice.innerHTML = `${addComma(resultPrice + 3000)}원`;
+  $("#sum-all-items").innerHTML = `${addComma(resultPrice)}원`;
+  $("#total-price").innerHTML = `${addComma(resultPrice + 3000)}원`;
 
-  itemContainer.addEventListener("click", (event) => {
-    if (event.target.matches(".minus, .plus")) {
-      const countElem = event.target.parentNode.querySelector(".count");
-      const priceElem = event.target.parentNode.previousElementSibling;
-      const totalPriceElem = event.target.parentNode.nextElementSibling;
-      const price = parseInt(priceElem.innerHTML);
-      let count = parseInt(countElem.innerHTML);
-      if (event.target.classList.contains("plus")) {
-        count += 1;
-      } else if (count > 1) {
-        count -= 1;
-      } else {
+  // minus 버튼에 이벤트 리스너 등록
+  document.querySelectorAll(".minus").forEach((minus) => {
+    const count = minus.nextElementSibling;
+    minus.addEventListener("click", () => {
+      if (parseInt(count.innerHTML) <= 1) {
         alert("최소 구매 수량은 1개 입니다.");
+      } else {
+        count.innerHTML = parseInt(count.innerHTML) - 1;
+        /* 해당 상품의 합계 바꿈 */
+        const thisPrice = parseInt(
+          count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
+        );
+        const thisPriceSum = parseInt(
+          count.parentElement.nextElementSibling.innerHTML.replace(/[^\d]/g, ""),
+        );
+        count.parentElement.nextElementSibling.innerHTML = `${addComma(
+          thisPriceSum - thisPrice,
+        )}원`;
+        /* 상품금액, 결재예정금액 바꿈 */
+        const price = parseInt(
+          count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
+        );
+        const sumAllItems = parseInt(
+          document.querySelector("#sum-all-items").innerHTML.replace(/[^\d]/g, ""),
+        );
+        document.querySelector("#sum-all-items").innerHTML = `${addComma(
+          sumAllItems - price,
+        )}원`;
       }
-      countElem.innerHTML = count;
-      const totalPrice = price * count;
-      totalPriceElem.innerHTML = `${addComma(totalPrice)}원`;
-      const itemsPrice = Array.from(
-        document.querySelectorAll(".add-cart .total-price"),
-      ).reduce((acc, item) => acc + parseInt(item.textContent.replace(/[^\d]/g, "")), 0);
-      sumAllItems.innerHTML = `${addComma(itemsPrice)}원`;
-      totalprice.innerHTML = `${addComma(itemsPrice + 3000)}원`;
-    }
+    });
+  });
+
+  // plus 버튼에 이벤트 리스너 등록
+  document.querySelectorAll(".plus").forEach((plus) => {
+    const count = plus.previousElementSibling;
+    plus.addEventListener("click", () => {
+      count.innerHTML = parseInt(count.innerHTML) + 1;
+      /* 해당 상품의 합계 바꿈 */
+      const thisPrice = parseInt(
+        count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
+      );
+      const thisPriceSum = parseInt(
+        count.parentElement.nextElementSibling.innerHTML.replace(/[^\d]/g, ""),
+      );
+      count.parentElement.nextElementSibling.innerHTML = `${addComma(
+        thisPriceSum + thisPrice,
+      )}원`;
+      /* 상품금액, 결재예정금액 바꿈 */
+      const price = parseInt(
+        count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
+      );
+      const sumAllItems = parseInt(
+        document.querySelector("#sum-all-items").innerHTML.replace(/[^\d]/g, ""),
+      );
+      document.querySelector("#sum-all-items").innerHTML = `${addComma(
+        sumAllItems + price,
+      )}원`;
+    });
   });
 
   const toggleAll = document.querySelector(".all-select-text");
@@ -99,32 +139,33 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  const order = `
-  <section class="order-layout">
-  <section class="order-container">
-  <div class="close">X</div>
-  <div class="order-info">
-      <label for="order-address" class="label">주소</label>
-      <input class="order-address" id="address" type="text" placeholder="주소를 입력해 주세요." autocomplete="on">
-  </div>
-    <div class="cart-summary">
-      <dl>
-        <dt class="text">상품금액</dt>
-        <dd id="order-sum-all-items" class="result-text"></dd>
-        <dt class="text">배송비</dt>
-        <dd class="result-text">3,000원</dd>
-        <dt class="text">결제예정금액</dt>
-        <dd id="order-total-price"></dd>
-      </dl>
-      <button type="button" class="button" id="order-submit-button">
-        결제하기
-      </button>
-    </div>
-  </section>
-  </section>
-  `;
 
-  document.querySelector("button").addEventListener("click", () => {
+  const order = `
+    <section class="order-layout">
+    <section class="order-container">
+    <div class="close">X</div>
+    <div class="order-info">
+        <label for="order-address" class="label">주소</label>
+        <input class="order-address" id="address" type="text" placeholder="주소를 입력해 주세요." autocomplete="on">
+    </div>
+      <div class="cart-summary">
+        <dl>
+          <dt class="text">상품금액</dt>
+          <dd id="order-sum-all-items" class="result-text"></dd>
+          <dt class="text">배송비</dt>
+          <dd class="result-text">3,000원</dd>
+          <dt class="text">결제예정금액</dt>
+          <dd id="order-total-price"></dd>
+        </dl>
+        <button type="button" class="button" id="order-submit-button">
+          결제하기
+        </button>
+      </div>
+    </section>
+    </section>
+    `;
+
+  document.querySelector(".button").addEventListener("click", () => {
     window.scrollTo({
       behavior: "smooth",
       top: 0,
@@ -152,26 +193,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       localData.push(data);
     }
-
+    const orderItems = [];
     $("#order-submit-button").addEventListener("click", () => {
-      const orderItems = [];
-
       for (let i = 0; i < localStorage.length; i++) {
         const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        // const orderQuantity =
-        const orderItem = {
+
+        let orderItem = {
           productId: cartItem.productId,
           quantity: cartItem.quantity,
           price: cartItem.price,
+          productName: cartItem.productName,
         };
         orderItems.push(orderItem);
       }
-      console.log(orderItems);
     });
-
-    fetch("http://localhost:5500/api/v1/orders/6447711f27c7db450be860ba", {
+    const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ3YTYwYmZiZjM1MThmMzMyMGIzZDEiLCJpYXQiOjE2ODI0MTcxOTh9.TWD4PDEDKMlEeAA0HZKJY4BFH8OBgU3Gy-3x3A4v_AE"; // 사용자 토큰
+    fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -189,19 +231,19 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("결재 완료");
         } else {
           alert(`결재 실패
-    다시 시도해 주세요.`);
+다시 시도해 주세요.`);
           console.error("결재 실패:", response.statusText);
         }
       })
       .catch((error) => {
         alert(`결재 실패
-    다시 시도해 주세요.`);
+다시 시도해 주세요.`);
         console.error("결재 실패:", error);
       });
   });
 });
 
-/* 가격에 ,(쉼표) 삽입 */
+// /* 가격에 ,(쉼표) 삽입 */
 function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
