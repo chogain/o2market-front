@@ -1,18 +1,28 @@
-const imgEls = document.querySelectorAll(".product-main-img");
-const productNameEls = document.querySelectorAll(".product-name");
-const priceEls = document.querySelectorAll(".product-price");
-const companyEl = document.querySelector(".company");
-const reviewEl = document.querySelector(".review");
+const $ = (selector) => document.querySelector(selector);
+const $All = (selector) => document.querySelectorAll(selector);
 
-const minusBtns = document.querySelectorAll(".minus");
-const plusBtns = document.querySelectorAll(".plus");
-const countEls = document.querySelectorAll(".count");
-const totalPriceEls = document.querySelectorAll(".total-price");
+const imgEls = $All(".product-main-img");
+const productNameEls = $All(".product-name");
+const priceEls = $All(".product-price");
+const companyEl = $(".company");
+const reviewEl = $(".review");
+
+const minusBtns = $All(".minus");
+const plusBtns = $All(".plus");
+const countEls = $All(".count");
+const totalPriceEls = $All(".total-price");
 
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-fetch("./product.json")
+// 현재 열린 URL에서 뒤에 오는 값을 가져옵니다.
+const productId = window.location.pathname.split("/").pop();
+
+// 서버에 요청할 API 엔드포인트를 생성합니다.
+const apiEndpoint = "http://localhost:5500/api/v1/products/64493a8b01a64633ee6a0070";
+
+// 서버에 GET 요청을 보내서 데이터를 가져옵니다.
+fetch(apiEndpoint)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -28,7 +38,7 @@ fetch("./product.json")
     for (let i = 0; i < totalPriceEls.length; i++) {
       totalPriceEls[i].textContent = `${addComma(parseInt(price) * count)}원`;
     }
-    document.querySelector(".description").innerHTML = description;
+    $(".description").innerHTML = description;
     companyEl.innerHTML = company;
 
     /* 구매 수량 이벤트 등록 */
@@ -46,9 +56,6 @@ fetch("./product.json")
         totalPriceEls.forEach((totalPriceEl) => {
           totalPriceEl.textContent = `${addComma(parseInt(price) * count)}원`;
         });
-        // priceEls.forEach((priceEl) => {
-        //   priceEl.textContent = `${addCommas(productInfo.price)}원`;
-        // });
       });
     });
 
@@ -63,48 +70,153 @@ fetch("./product.json")
         });
       });
     });
+
     /* 장바구니 정보 local storage에 등록 */
-    const sendLocalStorageBtn = document.querySelectorAll(".storage-btn");
-    sendLocalStorageBtn.forEach((btn) => {
+    $All(".cart-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
+        const url = window.location.href; // 현재 페이지 URL 가져오기
+        const productId = url.substring(url.lastIndexOf("/") + 1);
+
         let maxIndex = 0;
-        let isSameProduct = false;
         let sameProductIndex = -1;
+
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
-          const data = JSON.parse(localStorage.getItem(key));
+          const rawData = localStorage.getItem(key);
+          let data;
+          try {
+            data = JSON.parse(rawData);
+          } catch (e) {
+            console.error(`Invalid JSON string: ${rawData}`);
+            continue;
+          }
           if (data.productName === productName) {
-            isSameProduct = true;
             sameProductIndex = key;
             break;
           }
           maxIndex = Math.max(maxIndex, Number(key));
         }
 
-        /* local storage에 같은 상품이 있을 경우 count만 추가 */
-        let dataToSave;
-        if (isSameProduct) {
-          dataToSave = {
-            id: sameProductIndex,
-            productName: productName,
-            price: price,
-            count: count,
-          };
-        } else {
-          const newId = maxIndex + 1;
-          dataToSave = {
-            id: newId,
-            productName: productName,
-            price: price,
-            count: count,
-          };
-        }
+        const dataToSave = {
+          id: sameProductIndex !== -1 ? sameProductIndex : maxIndex + 1,
+          productName,
+          price,
+          count,
+          productId,
+        };
 
         localStorage.setItem(dataToSave.id, JSON.stringify(dataToSave));
       });
     });
   })
   .catch((error) => console.error("데이터를 받아오는 동안 오류가 발생했습니다.", error));
+
+const order = `
+  <section class="order-layout">
+  <section class="order-container">
+  <div class="close">X</div>
+  <div class="order-product-info">
+    <div class="order-text">구매 상품</div>
+    <div class="order-product-name"></div>
+    <div class="order-text">상품 개수</div>
+    <div class="order-product-count"></div>
+  </div>
+  <div class="order-info">
+      <label for="order-address" class="label">주소</label>
+      <input class="order-address" id="address" type="text" placeholder="주소를 입력해 주세요." autocomplete="on">
+  </div>
+    <div class="cart-summary">
+      <dl>
+        <dt class="text">상품금액</dt>
+        <dd id="sum-all-items" class="result-text"></dd>
+        <dt class="text">배송비</dt>
+        <dd class="result-text">3,000원</dd>
+        <dt class="text">결제예정금액</dt>
+        <dd id="total-price"></dd>
+      </dl>
+      <button type="button" class="button green-bg" id="submitButton">
+        결제하기
+      </button>
+    </div>
+  </section>
+  </section>
+  `;
+
+$All(".payment-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: 0,
+    });
+    const orderEl = document.createElement("div");
+    orderEl.innerHTML = order;
+    $("main").append(orderEl);
+
+    const url = window.location.href; // 현재 페이지 URL 가져오기
+    const productId = url.substring(url.lastIndexOf("/") + 1);
+    const quantity = countEls[0].innerHTML;
+    const price = Number(priceEls[0].innerHTML.replace(/,/g, ""));
+
+    $(".order-product-name").innerHTML = productNameEls[0].innerHTML;
+    $(".order-product-count").innerHTML = quantity;
+    $("#sum-all-items").innerHTML = `${addComma(price)}원`;
+    $("#total-price").innerHTML = `${addComma(price + 3000)}원`;
+
+    $(".close").addEventListener("click", () => {
+      $("main").removeChild(orderEl);
+    });
+
+    $("#submitButton").addEventListener("click", () => {
+      fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderItems: [
+            {
+              productId: productId,
+              quantity: quantity,
+              price: price,
+            },
+          ],
+          orderAddr: $("#address").value,
+          deliveryState: 0,
+          deleteFlag: false,
+        }),
+      })
+        .then((response) => {
+          // 서버 응답 처리
+          if (response.ok) {
+            alert("결재 완료 되었습니다.");
+            window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
+            console.log("결재 완료");
+          } else {
+            alert(`결재 실패
+다시 시도해 주세요.`);
+            console.error("결재 실패:", response.statusText);
+          }
+        })
+        .catch((error) => {
+          alert(`결재 실패
+다시 시도해 주세요.`);
+          console.error("결재 실패:", error);
+        });
+    });
+  });
+});
+
+/* 같은 클래스를 가진 태그에 같은 값 삽입 */
+function PutSameValueinSameClass(elements, inputValue) {
+  elements.forEach((El) => {
+    El.innerHTML = inputValue;
+  });
+}
+
+/* 가격에 ,(쉼표) 삽입 */
+function addComma(price) {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 // /* 해당 상품의 상품평 등록 (구현 X) */
 // fetch("user.json")
@@ -139,10 +251,3 @@ fetch("./product.json")
 //       }
 //     }
 //   });
-
-/* 같은 클래스를 가진 태그에 같은 값 삽입 */
-function PutSameValueinSameClass(elements, inputValue) {
-  elements.forEach((El) => {
-    El.innerHTML = inputValue;
-  });
-}
