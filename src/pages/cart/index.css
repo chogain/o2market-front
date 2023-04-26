@@ -103,11 +103,6 @@
   margin: 0 10px;
 }
 
-.total {
-  width: 200px;
-  text-align: center;
-}
-
 .order-check-text {
   font-size: 28px;
   text-align: center;
@@ -134,7 +129,9 @@ dl > .text {
 #submitButton {
   height: 70px;
   width: 100%;
-  font-size: 20px;
+  font-size: 30px;
+  background-color: #0b3b0b;
+  color: whitesmoke;
 }
 
 .button {
@@ -146,6 +143,113 @@ dl > .text {
 }
 
 .green-bg {
+  border-radius: 5px;
+  margin-right: 15px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* 결제창 css */
+.order-layout {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-container {
+  width: 650px;
+  height: 400px;
+  margin-right: 50px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.order-layout .close {
+  text-align: right;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.order-layout .order-product-info {
+  margin: 0 20px;
+}
+
+.order-layout .order-product-info > div {
+  display: inline-block;
+  width: 49%;
+}
+
+.order-layout .order-text {
+  font-size: 20px;
+}
+
+.order-product-name,
+.order-product-count {
+  text-align: right;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+.order-layout .order-info {
+  font-size: 25px;
+  margin: 20px;
+  padding: 0px;
+}
+
+.order-layout .order-address {
+  width: 75%;
+  height: 35px;
+  margin-left: 30px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.order-layout .cart-summary {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+}
+
+.order-layout .cart-summary > dl * {
+  margin: 0 20px 10px 0;
+  text-align: right;
+}
+
+.order-layout dl > .text {
+  font-size: 17px;
+}
+
+.order-layout .result-text {
+  font-size: 22px;
+}
+
+.order-layout #order-total-price {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.order-layout #order-submit-button {
+  height: 60px;
+  width: 100%;
+  font-size: 25px;
+  background-color: #0b3b0b;
+  color: whitesmoke;
+  border: none;
+}
+
+.order-layout .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.order-layout .green-bg {
   border-radius: 5px;
   margin-right: 15px;
   padding: 10px;
