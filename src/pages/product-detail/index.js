@@ -15,14 +15,15 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-// 현재 열린 URL에서 뒤에 오는 값을 가져옵니다.
-const productId = window.location.pathname.split("/").pop();
+// // 현재 열린 URL에서 뒤에 오는 값을 가져옵니다.
+// const productId = window.location.pathname.split("/").pop();
 
-// 서버에 요청할 API 엔드포인트를 생성합니다.
-const apiEndpoint = "http://localhost:5500/api/v1/products/64493a8b01a64633ee6a0070";
+// // 서버에 요청할 API 엔드포인트를 생성합니다.
+// const apiEndpoint = "http://localhost:5500/api/v1/products/64410645ad088180b3542f78";
 
+const productId = "64493a8b01a64633ee6a0070";
 // 서버에 GET 요청을 보내서 데이터를 가져옵니다.
-fetch(apiEndpoint)
+fetch(`http://localhost:5500/api/v1/products/${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -152,8 +153,6 @@ $All(".payment-btn").forEach((btn) => {
     orderEl.innerHTML = order;
     $("main").append(orderEl);
 
-    const url = window.location.href; // 현재 페이지 URL 가져오기
-    const productId = url.substring(url.lastIndexOf("/") + 1);
     const quantity = countEls[0].innerHTML;
     const price = Number(priceEls[0].innerHTML.replace(/,/g, ""));
 
@@ -166,10 +165,19 @@ $All(".payment-btn").forEach((btn) => {
       $("main").removeChild(orderEl);
     });
 
+    const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ3YTYwYmZiZjM1MThmMzMyMGIzZDEiLCJpYXQiOjE2ODI0MTcxOTh9.TWD4PDEDKMlEeAA0HZKJY4BFH8OBgU3Gy-3x3A4v_AE"; // 사용자 토큰
     $("#submitButton").addEventListener("click", () => {
+      console.log(`productId: ${productId}`);
+      console.log(`quantity: ${quantity}`);
+      console.log(`price: ${price}`);
+      console.log(`productName: ${productNameEls[0].innerHTML}`);
+      console.log(`orderAddr: ${$("#address").value}`);
       fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -178,6 +186,7 @@ $All(".payment-btn").forEach((btn) => {
               productId: productId,
               quantity: quantity,
               price: price,
+              productName: productNameEls[0].innerHTML,
             },
           ],
           orderAddr: $("#address").value,
@@ -194,7 +203,7 @@ $All(".payment-btn").forEach((btn) => {
           } else {
             alert(`결재 실패
 다시 시도해 주세요.`);
-            console.error("결재 실패:", response.statusText);
+            console.error("결재 실패:", response.status);
           }
         })
         .catch((error) => {
