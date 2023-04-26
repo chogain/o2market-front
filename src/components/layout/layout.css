@@ -96,9 +96,6 @@ header .inner .main-menu {
   display: flex;
 }
 
-header .inner .main-menu .item {
-}
-
 header .inner .main-menu .item .item__name {
   padding: 10px 20px 34px 20px;
   font-family: Arial, Helvetica, sans-serif;
