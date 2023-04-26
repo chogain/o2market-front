@@ -178,6 +178,28 @@ body {
   color: #2a120adb;
 }
 
+.btn.btn--green {
+  color: rgb(124, 170, 44);
+  border-color: rgb(124, 170, 44);
+  border: 2px solid rgb(124, 170, 44);
+}
+
+.btn.btn--green:hover {
+  color: #fff;
+  background-color: rgb(124, 170, 44);
+}
+
+.btn.btn--green--reverse {
+  border-color: rgb(124, 170, 44);
+  background-color: rgb(124, 170, 44);
+  color: #fff;
+}
+
+.btn.btn--green--reverse:hover {
+  background-color: transparent;
+  color: rgb(124, 170, 44);
+}
+
 .green-color {
   color: rgb(124, 170, 44);
 }
