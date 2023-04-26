@@ -1,7 +1,7 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
 .slogan {
-  background-color: #fdfbf3;
+  background-color: #feffe8;
   /* background-color: #f8faf1; */
   height: 420px;
   margin-top: 80px;
@@ -30,8 +30,15 @@
   font-family: "Nanum Pen Script", cursive;
 }
 
-.slogan-text span {
+.slogan-text .scaleUp {
+  font-size: 54px;
+  color: #71ac3a;
+  line-height: 30px;
+}
+
+.slogan-text .green {
   text-decoration: underline;
+  color: #90ce57;
 }
 
 .slogan-image {

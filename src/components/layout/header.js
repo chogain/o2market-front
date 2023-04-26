@@ -7,7 +7,7 @@ export default function Header() {
       
       <ul class="main-menu">
         <li class="item">
-          <div class="item__name">채소</div>
+          <div class="item__name vegetable">채소</div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
@@ -54,7 +54,7 @@ export default function Header() {
           </div>
         </li>
         <li class="item">
-          <div class="item__name">과일</div>
+          <div class="item__name fruit">과일</div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">

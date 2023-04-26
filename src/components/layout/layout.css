@@ -12,8 +12,8 @@ header {
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: #f5fbef;
-  border-bottom: 1px solid #c8c8c8;
+  background-color: #f3ffe8;
+  border-bottom: 1px solid #b9c7a293;
 }
 
 header > .inner {
@@ -93,9 +93,30 @@ header .inner .main-menu {
 }
 
 header .inner .main-menu .item .item__name {
-  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 12px 30px 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
+}
+
+header .inner .main-menu .item .item__name::after {
+  display: inline-block;
+  content: "";
+  width: 26px;
+  height: 26px;
+  margin-left: 4px;
+  background-position: center;
+  background-size: 26px auto;
+}
+
+header .inner .main-menu .item .item__name.vegetable::after {
+  background-image: url(../../assets/images/menu-icon01.png);
+}
+
+header .inner .main-menu .item .item__name.fruit::after {
+  background-image: url(../../assets/images/menu-icon02.png);
 }
 
 header .inner .main-menu .item:hover .item__name {
@@ -147,7 +168,7 @@ header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li:h
 
 /* footer */
 footer {
-  border-top: 1px solid #c8c8c8;
+  border-top: 1px solid #b9c7a293;
   background-color: #f5fbef;
 }
 

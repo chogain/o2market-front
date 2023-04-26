@@ -20,12 +20,12 @@ export default function MainBanner() {
     </section>
 `;
 
-  const mainBannerImages = ["fruit-table", "avocado", "creditcard", "recipe", "parcel"];
+  const mainBannerImages = ["img01", "img02", "img03", "img04"];
   const mainBannnerList = mainBannerImages.map(
     (image) =>
       `<div class="slide-item">
       <a herf="#" class="banner-link">
-        <img class="banner-img" src="../../assets/images/banner-${image}.jpg" alt=${image} />
+        <img class="banner-img" src="../../assets/images/banner-${image}.png" alt=${image} />
       </a>
     </div>`,
   );
