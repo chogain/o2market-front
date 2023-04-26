@@ -106,3 +106,60 @@
   flex-shrink: 0;
   transition: left 0.15s;
 }
+
+/* intro */
+
+.introduction {
+  position: relative;
+}
+
+.introduction .bg-left {
+  width: 50%;
+  height: 100%;
+  background-color: #0b3b0b;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.introduction .bg-right {
+  width: 50%;
+  height: 100%;
+  background-color: #0b3b0b;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.introduction .bg-right > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.introduction .inner {
+  background-image: url("");
+  height: 241px;
+}
+
+.introduction .btn-group {
+  position: absolute;
+  bottom: 24px;
+  right: 0;
+  width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.introduction .btn-group .btn.sign-up {
+  margin-right: 10px;
+}
+
+.introduction .btn-group .btn.sign-in {
+  width: 110px;
+}
+
+.introduction .btn-group .btn.gift {
+  margin-top: 10px;
+  flex-grow: 1;
+}
