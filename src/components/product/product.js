@@ -1,7 +1,7 @@
 const mainProductSlide = document.querySelector("#product-recommendation-slide");
 
 async function getData() {
-  let response = await fetch("http://localhost:5500/api/v1/products");
+  let response = await fetch("/api/v1/products");
   let data = await response.json();
   return data;
 }
