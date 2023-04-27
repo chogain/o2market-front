@@ -38,13 +38,30 @@
           <!-- onsubmit="return fixMemberCheck()" -->
           <input type="hidden" name="mode" value="register" />
 
-          <label for="name">Name <span style="color: red">*</span></label>
+          <label for="name">이름 <span style="color: red">*</span></label>
           <input type="text" id="name" name="name" placeholder="이름을 입력하세요" />
           <p id="name_warning" style="display: none; margin-top: 0px"></p>
 
-          <label for="id">Id <span style="color: red">*</span></label>
-          <input type="text" id="id" name="id" placeholder="id를 입력하세요" value="" />
-          <p id="id_warning" style="display: none; margin-top: 0px"></p>
+          <label for="password">현재 비밀번호 <span style="color: red">*</span></label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="현재 비밀번호를 입력하세요"
+            value=""
+          />
+          <p id="password_warning" style="display: none; margin-top: 0px"></p>
+
+          <label for="newPassword"
+            >새로운 비밀번호 <span style="color: red">*</span></label
+          >
+          <input
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            placeholder="새로운 비밀번호를 입력하세요"
+            value=""
+          />
 
           <p id="passwordCheck_warning" style="display: none; margin-top: 0px"></p>
 
@@ -78,7 +95,11 @@
             value=""
           />
 
-          <input type="submit" value="수정하기" />
+          <input
+            onclick="updateMemberInformation(event)"
+            type="submit"
+            value="수정하기"
+          />
         </form>
       </div>
     </div>
