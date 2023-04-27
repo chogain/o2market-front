@@ -24,7 +24,8 @@ function loginCheck(e) {
     return;
   }
 
-  fetch("http://localhost:5500/api/v1/users/signIn", {
+  // http://localhost:5500/api/v1/users/signIn
+  fetch("/api/v1/users/signIn", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`, // 로그인 토큰
@@ -49,7 +50,7 @@ function loginCheck(e) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("Authorization", `Bearer ${data.token}`);
       // alert(userId);
-      window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
+      window.location.href = "../main/index.html";
       // alert(`로그인 토큰:${data.token}`);
       // alert(data._id);
       // console.log(data.token);
