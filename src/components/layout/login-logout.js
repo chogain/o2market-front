@@ -34,4 +34,3 @@ export function handleLogout() {
 }
 
 // 초기 로그인 상태 체크
-checkLoginStatus();

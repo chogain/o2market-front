@@ -17,13 +17,12 @@ export default function Header() {
                 <li>
                   <h4>잎채소</h4>
                   <ul>
-                    <li>양상추</li>
+                    <!-- <li><a href="../../../src/pages/product-detail/3">양상추</a></li> -->
                     <li>양배추</li>
                     <li>시금치</li>
                     <li>쑥갓</li>
                     <li>파슬리</li>
-                    <li>청경채</li>
-                    <li>쪽파</li>
+                  
                   
                   </ul>
                 </li>
@@ -36,8 +35,6 @@ export default function Header() {
                     <li>홍고추</li>
                     <li>고추</li>
                     <li>완두콩</li>
-                    <li>오이</li>
-                    <li>컬리플라워</li>
                     
                   </ul>
                 </li>
@@ -49,8 +46,7 @@ export default function Header() {
                     <li>통마늘</li>
                     <li>새척당근</li>
                     <li>고구마</li>
-                    <li>감자</li>
-                    <li>아스파라거스</li>
+              
 
                   </ul>
                 </li>
@@ -78,8 +74,6 @@ export default function Header() {
                     <li>블루베리</li>
                     <li>오렌지</li>
                     <li>토마토</li>
-                    <li>딸기</li>
-                    <li>토마토</li>
                     <li>천도복숭아</li>
                     <li>키위</li>
                   </ul>
@@ -88,8 +82,6 @@ export default function Header() {
                   <h4>열대 과일</h4>
                   <ul>
                     <li>납작복숭아</li>
-                    <li>라임</li>
-                    <li>망고스틴</li>
                     <li>메론</li>
                     <li>바나나</li>
                     <li>아보카도</li>
@@ -110,13 +102,13 @@ export default function Header() {
       <div class="sub-menu">
         <ul class="menu">
           <li>
-            <a href="/signin" id="login-btn" >로그인</a>
+            <a href="../../pages/login/index.html" id="login-btn" >로그인</a>
           </li>
           <li>
-            <a href="/mypage">마이페이지</a>
+            <a href="../../pages/myPage/index.html">마이페이지</a>
           </li>
           <li>
-            <a href="/mycart">장바구니</a>
+            <a href="../../pages/cart/index.html">장바구니</a>
           </li>
         </ul>
       </div>
