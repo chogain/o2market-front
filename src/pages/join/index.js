@@ -151,7 +151,8 @@ phone.addEventListener("blur", () => {
 });
 
 // 회원가입 폼 버튼 체크 함수
-function registerCheck() {
+function registerCheck(e) {
+  e.preventDefault();
   const nameInput = document.getElementById("name").value;
   // const idInput = document.getElementById("id").value;
   const passwordInput = document.getElementById("password").value;
@@ -182,7 +183,8 @@ function registerCheck() {
   }
 
   // 여기 자리에 서버로 보내는 동작을 시키면 됨
-  fetch("http://localhost:5500/api/v1/users/register", {
+  // http://localhost:5500/api/v1/users/register
+  fetch("/api/v1/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -201,6 +203,7 @@ function registerCheck() {
     })
     .then((data) => {
       console.log(data);
+      window.location.href = "../main/index.html";
     })
     .catch((error) => {
       console.error("에러 발생");
