@@ -23,11 +23,11 @@ fetch("http://localhost:5500/api/v1/products")
 function insertData(datas) {
   container.innerHTML = "";
   countProduct.innerHTML = datas.length;
-  datas.forEach(({ productName, price, imageUrl }) => {
+  datas.forEach(({ productName, price, imageUrl, _id }) => {
     container.innerHTML += `
     <article class="product pointer">
       <div>
-        <img src="${imageUrl}" alt="${productName}" />
+        <img src="${imageUrl}" alt="${_id}" />
       </div>
       <h3 class="product-name">${productName}</h3>
       <p class="product-price">${addComma(price)}</p>
@@ -124,3 +124,15 @@ sortABC.addEventListener("click", () =>
 function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+// 상품 클릭 시 해당 상품의 상세페이지로 이동
+const moveProductDetail = document.querySelectorAll(".product");
+moveProductDetail.forEach((product) => {
+  product.addEventListener("click", () => {
+    navigate(`products/${_id}`);
+  });
+});
+
+const navigate = (pathname) => {
+  window.location.href = pathname;
+};
