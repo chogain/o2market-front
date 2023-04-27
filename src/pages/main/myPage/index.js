@@ -36,12 +36,13 @@ fetch(`http://localhost:5500/api/v1/users/${userId}`, {
   })
   .then((data) => {
     document.getElementById("name").textContent = data.name;
+    // console.log(data);
   })
   .catch((error) => {
     console.error("Error fetching user information:", error);
   });
 
-// 주문 정보 받아오기
+// 배달 상태 받아오기
 fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
   method: "GET",
   headers: {
@@ -52,6 +53,7 @@ fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
     return response.json();
   })
   .then((data) => {
+    console.log(data);
     let preparingForDeliveryCount = 0;
     let inDeliveryCount = 0;
     let deliveryCompleteCount = 0;
@@ -80,7 +82,7 @@ fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
     console.error("Error fetching user information:", error);
   });
 
-// 주문취소
+// 주문 상태 받아오기
 fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
   method: "GET",
   headers: {
@@ -91,92 +93,158 @@ fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
     return response.json();
   })
   .then((data) => {
-    renderOrderList(data);
+    const orderStateDiv = document.getElementById("orderStateDiv");
+
+    // 주문 정보가 있을 경우
+    if (data.length > 0) {
+      // 주문 정보를 담은 HTML 요소 생성
+      const orderList = document.createElement("ul");
+
+      data.forEach((order) => {
+        // 주문에 대한 정보를 담은 HTML 요소 생성
+        const orderItem = document.createElement("li");
+
+        let deliveryStateText;
+        if (order.deliveryState === 0) {
+          deliveryStateText = "배송준비중";
+        } else if (order.deliveryState === 1) {
+          deliveryStateText = "배송중";
+        } else if (order.deliveryState === 2) {
+          deliveryStateText = "배송완료";
+        }
+
+        orderItem.textContent = `${order.orderItems[0].productName} - ${order.orderItems[0].quantity}개, ${order.orderItems[0].price}원 (${deliveryStateText})`;
+        orderList.appendChild(orderItem);
+      });
+
+      // 주문 정보를 담은 HTML 요소를 div에 추가
+      orderStateDiv.appendChild(orderList);
+
+      // "최근 주문내역이 없습니다." 문구 제거
+      const orderStateDivHeader = document.getElementById("orderStateDivHeader");
+      orderStateDiv.removeChild(orderStateDivHeader);
+    }
   })
   .catch((error) => {
     console.error("Error fetching user information:", error);
   });
 
-function renderOrderList(orderList) {
-  const orderStateDiv = document.getElementById("orderStateDiv");
-  const orderStateDivHeader = document.getElementById("orderStateDivHeader");
+//주문취소
+// const orderId = ;
 
-  // 주문내역이 없을 경우
-  if (orderList.length === 0) {
-    orderStateDivHeader.textContent = "최근 주문내역이 없습니다.";
-    return;
-  }
+// fetch(`http://localhost:5500/api/v1/orders/${userId}/${orderId}`, {
+//   method: "DELETE",
+//   headers: {
+//     Authorization: `${token}`, // 로그인 토큰
+//   },
+// })
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((data) => {
+//     //
+//   })
+//   .catch((error) => {
+//     console.error("Error fetching user information:", error);
+//   });
 
-  // 주문내역이 있을 경우
-  orderStateDivHeader.textContent = "주문내역";
-  orderList.forEach((order) => {
-    const orderDiv = document.createElement("div");
-    orderDiv.setAttribute("data-order-id", order._id);
+// 주문취소
+// fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
+//   method: "GET",
+//   headers: {
+//     Authorization: `${token}`, // 로그인 토큰
+//   },
+// })
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((data) => {
+//     renderOrderList(data);
+//   })
+//   .catch((error) => {
+//     console.error("Error fetching user information:", error);
+//   });
 
-    const orderInfoDiv = document.createElement("div");
-    const orderAddrP = document.createElement("p");
-    orderAddrP.textContent = `주문 주소: ${order.orderAddr}`;
-    const deliveryStateP = document.createElement("p");
-    deliveryStateP.textContent = `배송 상태: ${order.deliveryState}`;
+// function renderOrderList(orderList) {
+//   const orderStateDiv = document.getElementById("orderStateDiv");
+//   const orderStateDivHeader = document.getElementById("orderStateDivHeader");
 
-    orderInfoDiv.appendChild(orderAddrP);
-    orderInfoDiv.appendChild(deliveryStateP);
+//   // 주문내역이 없을 경우
+//   if (orderList.length === 0) {
+//     orderStateDivHeader.textContent = "최근 주문내역이 없습니다.";
+//     return;
+//   }
 
-    const orderItemsDiv = document.createElement("div");
-    order.orderItems.forEach((item) => {
-      const orderItemDiv = document.createElement("div");
-      const productNameP = document.createElement("p");
-      productNameP.textContent = `상품명: ${item.productId}`;
-      const quantityP = document.createElement("p");
-      quantityP.textContent = `수량: ${item.quantity}`;
-      const priceP = document.createElement("p");
-      priceP.textContent = `가격: ${item.price}`;
+//   // 주문내역이 있을 경우
+//   orderStateDivHeader.textContent = "주문내역";
+//   orderList.forEach((order) => {
+//     const orderDiv = document.createElement("div");
+//     orderDiv.setAttribute("data-order-id", order._id);
 
-      orderItemDiv.appendChild(productNameP);
-      orderItemDiv.appendChild(quantityP);
-      orderItemDiv.appendChild(priceP);
+//     const orderInfoDiv = document.createElement("div");
+//     const orderAddrP = document.createElement("p");
+//     orderAddrP.textContent = `주문 주소: ${order.orderAddr}`;
+//     const deliveryStateP = document.createElement("p");
+//     deliveryStateP.textContent = `배송 상태: ${order.deliveryState}`;
 
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "주문 취소";
-      deleteButton.addEventListener("click", () => {
-        deleteOrder(order._id, item._id);
-      });
+//     orderInfoDiv.appendChild(orderAddrP);
+//     orderInfoDiv.appendChild(deliveryStateP);
 
-      orderItemDiv.appendChild(deleteButton);
-      orderItemsDiv.appendChild(orderItemDiv);
-    });
+//     const orderItemsDiv = document.createElement("div");
+//     order.orderItems.forEach((item) => {
+//       const orderItemDiv = document.createElement("div");
+//       const productNameP = document.createElement("p");
+//       productNameP.textContent = `상품명: ${item.productId}`;
+//       const quantityP = document.createElement("p");
+//       quantityP.textContent = `수량: ${item.quantity}`;
+//       const priceP = document.createElement("p");
+//       priceP.textContent = `가격: ${item.price}`;
 
-    orderDiv.appendChild(orderInfoDiv);
-    orderDiv.appendChild(orderItemsDiv);
-    orderStateDiv.appendChild(orderDiv);
-  });
-}
+//       orderItemDiv.appendChild(productNameP);
+//       orderItemDiv.appendChild(quantityP);
+//       orderItemDiv.appendChild(priceP);
 
-// 삭제 함수
-function deleteOrder(userId, orderId, token) {
-  fetch(`http://localhost:5500/api/v1/orders/${userId}/${orderId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `${token}`, // 로그인 토큰
-    },
-  })
-    .then((response) => {
-      // 삭제가 완료되면 해당 주문 정보를 화면에서 제거합니다.
-      const orderDiv = document.querySelector(`[data-order-id="${orderId}"]`);
-      orderDiv.remove();
+//       const deleteButton = document.createElement("button");
+//       deleteButton.textContent = "주문 취소";
+//       deleteButton.addEventListener("click", () => {
+//         deleteOrder(order._id, item._id);
+//       });
 
-      // 삭제 이후, 최근 주문내역이 없다면 안내 메시지를 보여줍니다.
-      const orderItems = document.querySelectorAll("[data-order-id]");
-      if (orderItems.length === 0) {
-        const orderStateDiv = document.getElementById("orderStateDiv");
-        const orderStateDivHeader = document.getElementById("orderStateDivHeader");
-        orderStateDivHeader.textContent = "최근 주문내역이 없습니다.";
-      }
-    })
-    .catch((error) => {
-      console.error("Error deleting order:", error);
-    });
-}
+//       orderItemDiv.appendChild(deleteButton);
+//       orderItemsDiv.appendChild(orderItemDiv);
+//     });
+
+//     orderDiv.appendChild(orderInfoDiv);
+//     orderDiv.appendChild(orderItemsDiv);
+//     orderStateDiv.appendChild(orderDiv);
+//   });
+// }
+
+// // 삭제 함수
+// function deleteOrder(userId, orderId, token) {
+//   fetch(`http://localhost:5500/api/v1/orders/${userId}/${orderId}`, {
+//     method: "DELETE",
+//     headers: {
+//       Authorization: `${token}`, // 로그인 토큰
+//     },
+//   })
+//     .then((response) => {
+//       // 삭제가 완료되면 해당 주문 정보를 화면에서 제거합니다.
+//       const orderDiv = document.querySelector(`[data-order-id="${orderId}"]`);
+//       orderDiv.remove();
+
+//       // 삭제 이후, 최근 주문내역이 없다면 안내 메시지를 보여줍니다.
+//       const orderItems = document.querySelectorAll("[data-order-id]");
+//       if (orderItems.length === 0) {
+//         const orderStateDiv = document.getElementById("orderStateDiv");
+//         const orderStateDivHeader = document.getElementById("orderStateDivHeader");
+//         orderStateDivHeader.textContent = "최근 주문내역이 없습니다.";
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error deleting order:", error);
+//     });
+// }
 
 // 주문 상태 정보 출력하는 함수
 // function showOrderState(memberData) {
