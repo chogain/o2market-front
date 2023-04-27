@@ -8,7 +8,8 @@ function updateMemberInformation(e) {
   const phoneInput = document.getElementById("phone").value;
   const addressInput = document.getElementById("address").value;
 
-  fetch(`http://localhost:5500/api/v1/users/${userId}`, {
+  // http://localhost:5500/api/v1/users/${userId}
+  fetch(`/api/v1/users/${userId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -26,6 +27,7 @@ function updateMemberInformation(e) {
     })
     .then((data) => {
       console.log("User information updated successfully:", data);
+      window.location.href = "../main/index.html";
     })
     .catch((error) => {
       console.error("Error updating user information:", error);
@@ -39,7 +41,8 @@ const emailInput = document.getElementById("email");
 const phoneInput = document.getElementById("phone");
 const addressInput = document.getElementById("address");
 
-fetch(`http://localhost:5500/api/v1/users/${userId}`, {
+//http://localhost:5500/api/v1/users/${userId}
+fetch(`/api/v1/users/${userId}`, {
   method: "GET",
   headers: {
     Authorization: `${token}`, // 로그인 토큰
