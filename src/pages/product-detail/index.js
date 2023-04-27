@@ -21,7 +21,7 @@ let count = parseInt(countEls[0].textContent);
 // // 서버에 요청할 API 엔드포인트를 생성합니다.
 // const apiEndpoint = "http://localhost:5500/api/v1/products/64410645ad088180b3542f78";
 
-const productId = "64493a8b01a64633ee6a0070";
+const productId = "64493b1301a64633ee6a0073";
 // 서버에 GET 요청을 보내서 데이터를 가져옵니다.
 fetch(`http://localhost:5500/api/v1/products/${productId}`)
   .then((response) => response.json())
@@ -80,15 +80,16 @@ fetch(`http://localhost:5500/api/v1/products/${productId}`)
 
         let maxIndex = 0;
         let sameProductIndex = -1;
-
         for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          const rawData = localStorage.getItem(key);
-          let data;
           try {
+            const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            const rawData = localStorage.getItem(key);
+            let data;
+            if (!cartItem.productName) {
+              return false;
+            }
             data = JSON.parse(rawData);
           } catch (e) {
-            console.error(`Invalid JSON string: ${rawData}`);
             continue;
           }
           if (data.productName === productName) {
@@ -154,7 +155,7 @@ $All(".payment-btn").forEach((btn) => {
     $("main").append(orderEl);
 
     const quantity = countEls[0].innerHTML;
-    const price = Number(priceEls[0].innerHTML.replace(/,/g, ""));
+    const price = Number(priceEls[0].innerHTML.replace(/,/g, "")) * Number(quantity);
 
     $(".order-product-name").innerHTML = productNameEls[0].innerHTML;
     $(".order-product-count").innerHTML = quantity;
@@ -167,7 +168,7 @@ $All(".payment-btn").forEach((btn) => {
 
     const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ3YTYwYmZiZjM1MThmMzMyMGIzZDEiLCJpYXQiOjE2ODI0MTcxOTh9.TWD4PDEDKMlEeAA0HZKJY4BFH8OBgU3Gy-3x3A4v_AE"; // 사용자 토큰
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ4ZmE2ZDAxZTQzMjAwMDBkNTVmOWUiLCJpYXQiOjE2ODI1NjUwMDR9.gq7r3RUBo1ae2ASYJqH6Vpu7mI1Eqif4dqfmIW5xcg4"; // 사용자 토큰
     $("#submitButton").addEventListener("click", () => {
       console.log(`productId: ${productId}`);
       console.log(`quantity: ${quantity}`);
