@@ -1,6 +1,7 @@
 const topBtn = document.querySelector(".top-btn");
 const token = localStorage.getItem("Authorization");
 const userId = localStorage.getItem("userId");
+
 // const userId = JSON.parse(localStorage.getItem("userId"));
 // const token = JSON.parse(localStorage.getItem("Authorization"));
 
@@ -11,21 +12,17 @@ const userId = localStorage.getItem("userId");
 // console.log(userId);
 // console.log(localStorage);
 
-let orderNumber;
-let memberId;
+// let orderNumber;
+// let memberId;
 
-// memberData 초기화
-let memberData = {};
+// // memberData 초기화
+// let memberData = {};
 
 // 이름, 포인트, 쿠폰 정보 출력하는 함수
-function showMemberInfo(userId) {
-  document.getElementById("name").innerText = userId.name;
-  // document.getElementById("point").innerText = userId.point;
-  // document.getElementById("coupon").innerText = memberData[0].coupon;
-}
 
 // 이름 넣기
-fetch(`http://localhost:5500/api/v1/users/${userId}`, {
+// http://localhost:5500/api/v1/users/${userId}
+fetch(`/api/v1/users/${userId}`, {
   method: "GET",
   headers: {
     Authorization: `${token}`, // 로그인 토큰
@@ -43,7 +40,8 @@ fetch(`http://localhost:5500/api/v1/users/${userId}`, {
   });
 
 // 배달 상태 받아오기
-fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
+// http://localhost:5500/api/v1/orders/${userId}
+fetch(`/api/v1/orders/${userId}`, {
   method: "GET",
   headers: {
     Authorization: `${token}`, // 로그인 토큰
@@ -83,7 +81,8 @@ fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
   });
 
 // 주문 상태 받아오기
-fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
+// http://localhost:5500/api/v1/orders/${userId}
+fetch(`/api/v1/orders/${userId}`, {
   method: "GET",
   headers: {
     Authorization: `${token}`, // 로그인 토큰
@@ -129,6 +128,10 @@ fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
     console.error("Error fetching user information:", error);
   });
 
+// const button = document.getElementById("myButton");
+// button.addEventListener("click", () => {
+//   window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
+// });
 //주문취소
 // const orderId = ;
 
