@@ -123,17 +123,19 @@ document.addEventListener("DOMContentLoaded", function () {
           checkbox.nextElementSibling.innerHTML.indexOf("(", 0),
         );
         for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          const rawData = localStorage.getItem(key);
-          let data;
           try {
-            data = JSON.parse(rawData);
+            const key = localStorage.key(i);
+            const rawData = localStorage.getItem(key);
+            let data = JSON.parse(rawData);
+            if (!data.productName) {
+              return false;
+            }
+            if (data.productName === name) {
+              localStorage.removeItem(key);
+              location.reload();
+            }
           } catch (e) {
-            console.error(`Invalid JSON string: ${rawData}`);
             continue;
-          }
-          if (data.productName === name) {
-            localStorage.removeItem(key);
           }
         }
       }
@@ -180,36 +182,47 @@ document.addEventListener("DOMContentLoaded", function () {
       $("main").removeChild(orderEl);
     });
 
-    const localData = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const rawData = localStorage.getItem(key);
-      let data;
-      try {
-        data = JSON.parse(rawData);
-      } catch (e) {
-        console.error(`Invalid JSON string: ${rawData}`);
-        continue;
-      }
-      localData.push(data);
-    }
-    const orderItems = [];
-    $("#order-submit-button").addEventListener("click", () => {
-      for (let i = 0; i < localStorage.length; i++) {
-        const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    // const localData = [];
+    // for (let i = 0; i < localStorage.length; i++) {
+    //   const key = localStorage.key(i);
+    //   const rawData = localStorage.getItem(key);
+    //   let data;
+    //   try {
+    //     data = JSON.parse(rawData);
+    //   } catch (e) {
+    //     console.error(`Invalid JSON string: ${rawData}`);
+    //     continue;
+    //   }
+    //   localData.push(data);
+    // }
 
+    const orderItems = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const orderCount = document.querySelectorAll(".count")[1].innerHTML;
+      try {
+        const key = localStorage.key(i);
+        if (!Number(key)) {
+          continue;
+        }
+        const rawData = localStorage.getItem(key);
+        let data = JSON.parse(rawData);
         let orderItem = {
-          productId: cartItem.productId,
-          quantity: cartItem.quantity,
-          price: cartItem.price,
-          productName: cartItem.productName,
+          productId: data.productId,
+          quantity: orderCount,
+          price: data.price,
+          productName: data.productName,
         };
         orderItems.push(orderItem);
+      } catch (e) {
+        console.log(e);
+        continue;
       }
-    });
+    }
+
+    console.log(orderItems);
     const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ3YTYwYmZiZjM1MThmMzMyMGIzZDEiLCJpYXQiOjE2ODI0MTcxOTh9.TWD4PDEDKMlEeAA0HZKJY4BFH8OBgU3Gy-3x3A4v_AE"; // 사용자 토큰
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ4ZmE2ZDAxZTQzMjAwMDBkNTVmOWUiLCJpYXQiOjE2ODI1NjUwMDR9.gq7r3RUBo1ae2ASYJqH6Vpu7mI1Eqif4dqfmIW5xcg4"; // 사용자 토큰
     fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
       method: "POST",
       headers: {
@@ -231,13 +244,13 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("결재 완료");
         } else {
           alert(`결재 실패
-다시 시도해 주세요.`);
+    다시 시도해 주세요.`);
           console.error("결재 실패:", response.statusText);
         }
       })
       .catch((error) => {
         alert(`결재 실패
-다시 시도해 주세요.`);
+    다시 시도해 주세요.`);
         console.error("결재 실패:", error);
       });
   });
