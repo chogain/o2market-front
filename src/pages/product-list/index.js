@@ -13,9 +13,10 @@ const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
 // json 데이터 불러오기
-fetch("http://localhost:5500/api/v1/products")
+fetch("/api/v1/products")
   .then((res) => res.json())
   .then((datas) => {
+    console.log(datas);
     insertData(datas);
   });
 
@@ -23,11 +24,11 @@ fetch("http://localhost:5500/api/v1/products")
 function insertData(datas) {
   container.innerHTML = "";
   countProduct.innerHTML = datas.length;
-  datas.forEach(({ productName, price, imageUrl, _id }) => {
+  datas.forEach(({ productName, price, imageUri }) => {
     container.innerHTML += `
     <article class="product pointer">
       <div>
-        <img src="${imageUrl}" alt="${_id}" />
+        <img src="${imageUri}" alt="${productName}" />
       </div>
       <h3 class="product-name">${productName}</h3>
       <p class="product-price">${addComma(price)}</p>
@@ -47,7 +48,7 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
   button.addEventListener("click", () => {
     toggleClass(findhaveClass, El, willtoggledClass);
 
-    fetch("http://localhost:5500/api/v1/products")
+    fetch("/api/v1/products")
       .then((res) => res.json())
       .then((datas) => {
         container.innerHTML = "";
@@ -61,7 +62,7 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
 
 // 카테고리 찾아 필터된 데이터 리턴하는 함수
 function categoryData(category) {
-  return fetch("http://localhost:5500/api/v1/products")
+  return fetch("/api/v1/products")
     .then((res) => res.json())
     .then((datas) => {
       const dataBox = datas.filter((data) => {
@@ -72,7 +73,7 @@ function categoryData(category) {
 }
 
 // 전체버튼 클릭시 이벤트 등록
-fetch("http://localhost:5500/api/v1/products")
+fetch("/api/v1/products")
   .then((res) => res.json())
   .then((datas) =>
     filterTotal.addEventListener("click", () => {
@@ -88,7 +89,7 @@ categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
 async function findCategory() {
   let dataBox;
   if (filterTotal.classList.contains("bg-darkgreen")) {
-    const res = await fetch("http://localhost:5500/api/v1/products");
+    const res = await fetch("/api/v1/products");
     const datas = await res.json();
     dataBox = datas;
   } else if (filterVegetable.classList.contains("bg-darkgreen")) {
@@ -124,15 +125,3 @@ sortABC.addEventListener("click", () =>
 function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-// 상품 클릭 시 해당 상품의 상세페이지로 이동
-const moveProductDetail = document.querySelectorAll(".product");
-moveProductDetail.forEach((product) => {
-  product.addEventListener("click", () => {
-    navigate(`products/${_id}`);
-  });
-});
-
-const navigate = (pathname) => {
-  window.location.href = pathname;
-};

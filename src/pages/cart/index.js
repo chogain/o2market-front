@@ -2,7 +2,7 @@ const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const itemContainer = document.querySelector(".add-order");
+  const itemContainer = $(".add-order");
   let resultPrice = 0;
   for (let i = 0; i < localStorage.length; i++) {
     try {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#total-price").innerHTML = `${addComma(resultPrice + 3000)}원`;
 
   // minus 버튼에 이벤트 리스너 등록
-  document.querySelectorAll(".minus").forEach((minus) => {
+  $All(".minus").forEach((minus) => {
     const count = minus.nextElementSibling;
     minus.addEventListener("click", () => {
       if (parseInt(count.innerHTML) <= 1) {
@@ -56,18 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const price = parseInt(
           count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
         );
-        const sumAllItems = parseInt(
-          document.querySelector("#sum-all-items").innerHTML.replace(/[^\d]/g, ""),
-        );
-        document.querySelector("#sum-all-items").innerHTML = `${addComma(
-          sumAllItems - price,
-        )}원`;
+        const sumAllItems = parseInt($("#sum-all-items").innerHTML.replace(/[^\d]/g, ""));
+        $("#sum-all-items").innerHTML = `${addComma(sumAllItems - price)}원`;
+        $("#total-price").innerHTML = `${addComma(sumAllItems - price + 3000)}원`;
       }
     });
   });
 
   // plus 버튼에 이벤트 리스너 등록
-  document.querySelectorAll(".plus").forEach((plus) => {
+  $All(".plus").forEach((plus) => {
     const count = plus.previousElementSibling;
     plus.addEventListener("click", () => {
       count.innerHTML = parseInt(count.innerHTML) + 1;
@@ -85,17 +82,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const price = parseInt(
         count.parentElement.previousElementSibling.innerHTML.replace(/[^\d]/g, ""),
       );
-      const sumAllItems = parseInt(
-        document.querySelector("#sum-all-items").innerHTML.replace(/[^\d]/g, ""),
-      );
-      document.querySelector("#sum-all-items").innerHTML = `${addComma(
-        sumAllItems + price,
-      )}원`;
+      const sumAllItems = parseInt($("#sum-all-items").innerHTML.replace(/[^\d]/g, ""));
+      $("#sum-all-items").innerHTML = `${addComma(sumAllItems + price)}원`;
+      $("#total-price").innerHTML = `${addComma(sumAllItems + price + 3000)}원`;
     });
   });
 
-  const toggleAll = document.querySelector(".all-select-text");
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const toggleAll = $(".all-select-text");
+  const checkboxes = $All('input[type="checkbox"]');
 
   toggleAll.addEventListener("click", () => {
     if (toggleAll.innerHTML === "전체선택해제") {
@@ -111,10 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  const deleteBtn = document.querySelector("#delete-btn");
+  const deleteBtn = $("#delete-btn");
 
   deleteBtn.addEventListener("click", () => {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = $All('input[type="checkbox"]');
     // 체크된 체크박스와 같은 이름의 local storage 데이터를 지웁니다.
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
@@ -167,7 +161,31 @@ document.addEventListener("DOMContentLoaded", function () {
     </section>
     `;
 
-  document.querySelector(".button").addEventListener("click", () => {
+  const orderItems = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const orderCount = $All(".count")[1].innerHTML;
+    try {
+      const key = localStorage.key(i);
+      if (!Number(key)) {
+        continue;
+      }
+      const rawData = localStorage.getItem(key);
+      let data = JSON.parse(rawData);
+      console.log(data.id);
+      let orderItem = {
+        productId: data.id,
+        quantity: orderCount,
+        price: data.price,
+        productName: data.productName,
+      };
+      orderItems.push(orderItem);
+    } catch (e) {
+      console.log(e);
+      continue;
+    }
+  }
+
+  $(".button").addEventListener("click", () => {
     window.scrollTo({
       behavior: "smooth",
       top: 0,
@@ -175,84 +193,55 @@ document.addEventListener("DOMContentLoaded", function () {
     const orderEl = document.createElement("div");
     orderEl.innerHTML = order;
     $("main").append(orderEl);
-    $("#order-sum-all-items").innerHTML = `${addComma(resultPrice)}원`;
-    $("#order-total-price").innerHTML = `${addComma(resultPrice + 3000)}원`;
+    $("#order-sum-all-items").innerHTML = $("#sum-all-items").innerHTML;
+    $("#order-total-price").innerHTML = $("#total-price").innerHTML;
 
     $(".close").addEventListener("click", () => {
       $("main").removeChild(orderEl);
     });
 
-    // const localData = [];
-    // for (let i = 0; i < localStorage.length; i++) {
-    //   const key = localStorage.key(i);
-    //   const rawData = localStorage.getItem(key);
-    //   let data;
-    //   try {
-    //     data = JSON.parse(rawData);
-    //   } catch (e) {
-    //     console.error(`Invalid JSON string: ${rawData}`);
-    //     continue;
-    //   }
-    //   localData.push(data);
-    // }
-
-    const orderItems = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const orderCount = document.querySelectorAll(".count")[1].innerHTML;
-      try {
-        const key = localStorage.key(i);
-        if (!Number(key)) {
-          continue;
-        }
-        const rawData = localStorage.getItem(key);
-        let data = JSON.parse(rawData);
-        let orderItem = {
-          productId: data.productId,
-          quantity: orderCount,
-          price: data.price,
-          productName: data.productName,
-        };
-        orderItems.push(orderItem);
-      } catch (e) {
-        console.log(e);
-        continue;
-      }
-    }
-
-    console.log(orderItems);
-    const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ4ZmE2ZDAxZTQzMjAwMDBkNTVmOWUiLCJpYXQiOjE2ODI1NjUwMDR9.gq7r3RUBo1ae2ASYJqH6Vpu7mI1Eqif4dqfmIW5xcg4"; // 사용자 토큰
-    fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderItems: orderItems,
-        orderAddr: $("#address").value,
-        deliveryState: 0,
-        deleteFlag: false,
-      }),
-    })
-      .then((response) => {
-        // 서버 응답 처리
-        if (response.ok) {
-          alert("결재 완료 되었습니다.");
-          window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
-          console.log("결재 완료");
-        } else {
+    $("#order-submit-button").addEventListener("click", () => {
+      const userId = localStorage.getitem("userId"); // 주문 조회할 ID
+      const token = localStorage.getItem("token"); // 사용자 토큰
+      // console.log(
+      //   JSON.stringify({
+      //     orderItems: orderItems,
+      //     orderAddr: $("#address").value,
+      //     deliveryState: 0,
+      //     deleteFlag: false,
+      //   }),
+      // );
+      fetch(`/api/v1/orders/${userId}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderItems: orderItems,
+          orderAddr: $("#address").value,
+          deliveryState: 0,
+          deleteFlag: false,
+        }),
+      })
+        .then((response) => {
+          // 서버 응답 처리
+          if (response.ok) {
+            alert("결재 완료 되었습니다.");
+            window.location.href = "/src/pages/main/index.html";
+            console.log("결재 완료");
+          } else {
+            alert(`결재 실패
+    다시 시도해 주세요.`);
+            console.error("결재 실패:", response.statusText);
+          }
+        })
+        .catch((error) => {
           alert(`결재 실패
     다시 시도해 주세요.`);
-          console.error("결재 실패:", response.statusText);
-        }
-      })
-      .catch((error) => {
-        alert(`결재 실패
-    다시 시도해 주세요.`);
-        console.error("결재 실패:", error);
-      });
+          console.error("결재 실패:", error);
+        });
+    });
   });
 });
 

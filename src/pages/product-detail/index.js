@@ -21,19 +21,23 @@ let count = parseInt(countEls[0].textContent);
 // // 서버에 요청할 API 엔드포인트를 생성합니다.
 // const apiEndpoint = "http://localhost:5500/api/v1/products/64410645ad088180b3542f78";
 
-const productId = "64493b1301a64633ee6a0073";
-// 서버에 GET 요청을 보내서 데이터를 가져옵니다.
-fetch(`http://localhost:5500/api/v1/products/${productId}`)
+// 일단 지정
+const productId = 5;
+// 서버에 GET 요청을 보내서 데이터 가져옴.
+fetch(`http:///api/v1/products/${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
     const productName = datas.productName;
-    const imgUrl = datas.imageUrl;
+    const imgUri = datas.imageUri;
     const description = datas.description;
     const price = datas.price;
     const company = datas.company;
+    // 지금 이렇게 하면 index.html 나와서 주석처리 함
+    // const productId = document.location.href.split("/");
+    console.log(productId);
 
-    PutSameValueinSameClass(imgEls, `<img src="${imgUrl}" alt="${productName}">`);
+    PutSameValueinSameClass(imgEls, `<img src="${imgUri}" alt="${productName}">`);
     PutSameValueinSameClass(productNameEls, productName);
     PutSameValueinSameClass(priceEls, addComma(price));
     for (let i = 0; i < totalPriceEls.length; i++) {
@@ -80,16 +84,15 @@ fetch(`http://localhost:5500/api/v1/products/${productId}`)
 
         let maxIndex = 0;
         let sameProductIndex = -1;
+
         for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          const rawData = localStorage.getItem(key);
+          let data;
           try {
-            const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
-            const rawData = localStorage.getItem(key);
-            let data;
-            if (!cartItem.productName) {
-              return false;
-            }
             data = JSON.parse(rawData);
           } catch (e) {
+            console.error(`Invalid JSON string: ${rawData}`);
             continue;
           }
           if (data.productName === productName) {
@@ -104,14 +107,19 @@ fetch(`http://localhost:5500/api/v1/products/${productId}`)
           productName,
           price,
           count,
-          productId,
+          description,
         };
 
         localStorage.setItem(dataToSave.id, JSON.stringify(dataToSave));
+        alert("상품이 장바구니에 성공적으로 담겼습니다.");
       });
     });
   })
-  .catch((error) => console.error("데이터를 받아오는 동안 오류가 발생했습니다.", error));
+  .catch((error) => {
+    alert(`상품을 장바구니에 담는 것에 실패했습니다.
+다시 시도해주세요.`);
+    console.error("데이터를 받아오는 동안 오류가 발생했습니다.", error);
+  });
 
 const order = `
   <section class="order-layout">
@@ -155,7 +163,7 @@ $All(".payment-btn").forEach((btn) => {
     $("main").append(orderEl);
 
     const quantity = countEls[0].innerHTML;
-    const price = Number(priceEls[0].innerHTML.replace(/,/g, "")) * Number(quantity);
+    const price = Number(priceEls[0].innerHTML.replace(/,/g, ""));
 
     $(".order-product-name").innerHTML = productNameEls[0].innerHTML;
     $(".order-product-count").innerHTML = quantity;
@@ -166,16 +174,14 @@ $All(".payment-btn").forEach((btn) => {
       $("main").removeChild(orderEl);
     });
 
-    const orderId = "64458af4b890a33b60d299f3"; // 주문 조회할 ID
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ4ZmE2ZDAxZTQzMjAwMDBkNTVmOWUiLCJpYXQiOjE2ODI1NjUwMDR9.gq7r3RUBo1ae2ASYJqH6Vpu7mI1Eqif4dqfmIW5xcg4"; // 사용자 토큰
+    const userId = localStorage.get("userId"); // 주문 조회할 ID
+    const token = localStorage.get("token"); // 사용자 토큰
     $("#submitButton").addEventListener("click", () => {
-      console.log(`productId: ${productId}`);
       console.log(`quantity: ${quantity}`);
       console.log(`price: ${price}`);
       console.log(`productName: ${productNameEls[0].innerHTML}`);
       console.log(`orderAddr: ${$("#address").value}`);
-      fetch("http://localhost:5500/api/v1/orders/64458af4b890a33b60d299f3", {
+      fetch(`http://127.0.0.1:5500/api/v1/orders/${userId}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
