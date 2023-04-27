@@ -116,7 +116,7 @@ export default async function ProductCard() {
     (product) =>
       `<li class="product">
         <a href="#">
-          <div><img src=${product.imageUrl} alt=${product.description}></div>
+          <div><img src=${product.imageUri} alt=${product.description}></div>
           <h3 class="product-name">${product.productName}</h3>
           <p class="product-price">${product.price}</p>
         </a>

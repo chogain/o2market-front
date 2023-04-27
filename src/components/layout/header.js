@@ -1,3 +1,6 @@
+// import checkLoginStatus from "./login-logout.js";
+// checkLoginStatus();
+
 // body 태그 아래 <header id="header"></header> 생성
 export default function Header() {
   const header = document.querySelector("header");
@@ -107,7 +110,7 @@ export default function Header() {
       <div class="sub-menu">
         <ul class="menu">
           <li>
-            <a href="/signin" id="login-btn">로그인</a>
+            <a href="/signin" id="login-btn" >로그인</a>
           </li>
           <li>
             <a href="/mypage">마이페이지</a>

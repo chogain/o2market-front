@@ -79,7 +79,7 @@ async function loadOrderCompleted() {
 
       const itemHtml = `
         <li>
-          <span>${item.productId}</span>
+          <span>${item.productName}</span>
           <span>${item.quantity}개</span>
           <span>${addComma(totalItemPrice)}원</span>
         </li>`;
