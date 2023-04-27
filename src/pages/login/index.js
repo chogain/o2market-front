@@ -50,6 +50,7 @@ function loginCheck(e) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("Authorization", `Bearer ${data.token}`);
       // alert(userId);
+
       window.location.href = "../main/index.html";
       // alert(`로그인 토큰:${data.token}`);
       // alert(data._id);
