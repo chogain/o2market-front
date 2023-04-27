@@ -1,0 +1,236 @@
+/************* 헤더 *****************/
+
+#headerTwo {
+  display: flex;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 90px;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#headerFour {
+  display: flex;
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/************* 마이페이지 시작*****************/
+.holeMyPageDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.myPageDiv {
+  /* background-color: #638763; */
+  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  /* border: 1px solid black; */
+  border-radius: 10px; /* 모서리 둥글기 적용 */
+}
+
+#myPageDivHeader {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.myPageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 포인트를 나타내는 박스 스타일 */
+.pointBtn {
+  width: 150px;
+  height: 50px;
+  background: none;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 1em;
+}
+
+/* 쿠폰을 나타내는 박스 스타일 */
+.couponBtn {
+  width: 150px;
+  height: 50px;
+  background: none;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+}
+
+.pointBtn span,
+.couponBtn span {
+  display: block;
+  font-size: 15px;
+}
+
+/************* 마아페이지 끝*****************/
+
+/************* 주문/배송 시작 *****************/
+
+.holeOrderDeliveryDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.orderDeliveryDiv {
+  width: 1120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #aec6b6;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.orderDeliveryDiv div {
+  width: 120px;
+  height: 80px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.orderDeliveryDiv div:hover {
+  background-color: #ddd;
+}
+
+.holeOrderStateDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#orderStateDiv {
+  background-color: #638763;
+  width: 600px;
+  min-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#orderStateDiv > div {
+  margin: 10px 10px;
+  min-width: 100px;
+  min-height: 50px;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#orderStateDiv > div button {
+  width: 100px;
+  margin-left: 20px;
+}
+
+#orderStateDiv > div .changeDiv {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#orderStateDiv > div .changeDiv label {
+  margin-right: 10px;
+}
+
+#orderStateDiv h2 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#orderStateDivHeader {
+  display: flex;
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/************* 주문/배송 끝 *****************/
+
+/************* 취소/반품/교환 시작 *****************/
+
+.holeReturnOfGoodsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.holeReturnOfGoodsDiv h4 {
+  display: flex;
+}
+
+.returnOfGoodsDiv {
+  background-color: #638763;
+  width: 1120px;
+  min-height: 300px; /* 최소 높이 300px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.returnOfGoodsDiv h2 {
+  display: flex;
+  justify-content: center;
+}
+
+/************* 취소/반품/교환 끝 *****************/
+.top-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  color: gray;
+  font-size: 14px;
+}

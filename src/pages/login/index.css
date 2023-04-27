@@ -1,0 +1,51 @@
+#headerOne {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.67em 0;
+}
+
+.holeMemberFormDiv {
+  display: flex;
+  justify-content: center;
+  margin: 80px;
+}
+
+.memberFormDiv {
+  margin: 90px;
+  width: 450px;
+}
+
+.memberFormDiv h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.memberFormDiv input {
+  margin-bottom: 20px;
+  height: 50px;
+  width: 350px;
+  border-radius: 5px;
+  border: 0px;
+  background-color: whitesmoke;
+}
+
+.memberFormDiv input:last-child {
+  background-color: #FEFEEA;
+  margin-bottom: 20px;
+}
+
+.memberForm {
+  margin-left: 50px;
+}
+
+.joinBtn {
+  margin-left: 50px;
+  margin-bottom:69px;
+  height: 50px;
+  width: 350px;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #7fab4dbb;
+}

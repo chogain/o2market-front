@@ -1,0 +1,257 @@
+.width {
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+}
+
+.cart-title {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid black;
+}
+
+.cart {
+  width: 100%;
+  margin: 20px 0 30px 0;
+}
+
+.cart-item {
+  display: inline-block;
+  height: 30px;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cart .margin {
+  margin-left: 20px;
+}
+
+.cart .product {
+  width: 45%;
+}
+
+.cart > .count {
+  text-align: center;
+  width: 180px;
+}
+
+.cart .total-price {
+  width: 190px;
+
+  text-align: right;
+}
+
+.add-cart {
+  height: 60px;
+}
+
+.add-cart > span {
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px 0 10px 0;
+}
+
+.product {
+  width: 450px;
+  padding-left: 10px;
+}
+
+.price {
+  width: 200px;
+  text-align: center;
+}
+
+.count {
+  width: 20px;
+  text-align: center;
+}
+.count-box {
+  display: inline-block;
+  width: 180px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.count-box * {
+  display: inline-block;
+}
+
+.minus {
+  padding: 1px 12px 3px 12px;
+  font-size: 22px;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.plus {
+  padding: 5px 10px 5px 10px;
+  font-size: 18px;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.count-box .count {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.order-check-text {
+  font-size: 28px;
+  text-align: center;
+}
+
+.cart-summary > dl * {
+  margin: 0 20px 10px 0;
+  text-align: right;
+}
+
+dl > .text {
+  font-size: 25px;
+}
+
+.result-text {
+  font-size: 28px;
+}
+
+#total-price {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#submitButton {
+  height: 70px;
+  width: 100%;
+  font-size: 30px;
+  background-color: #0b3b0b;
+  color: whitesmoke;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.green-bg {
+  border-radius: 5px;
+  margin-right: 15px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* 결제창 css */
+.order-layout {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-container {
+  width: 650px;
+  height: 400px;
+  margin-right: 50px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.order-layout .close {
+  text-align: right;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.order-layout .order-product-info {
+  margin: 0 20px;
+}
+
+.order-layout .order-product-info > div {
+  display: inline-block;
+  width: 49%;
+}
+
+.order-layout .order-text {
+  font-size: 20px;
+}
+
+.order-product-name,
+.order-product-count {
+  text-align: right;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+.order-layout .order-info {
+  font-size: 25px;
+  margin: 20px;
+  padding: 0px;
+}
+
+.order-layout .order-address {
+  width: 75%;
+  height: 35px;
+  margin-left: 30px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.order-layout .cart-summary {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+}
+
+.order-layout .cart-summary > dl * {
+  margin: 0 20px 10px 0;
+  text-align: right;
+}
+
+.order-layout dl > .text {
+  font-size: 17px;
+}
+
+.order-layout .result-text {
+  font-size: 22px;
+}
+
+.order-layout #order-total-price {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.order-layout #order-submit-button {
+  height: 60px;
+  width: 100%;
+  font-size: 25px;
+  background-color: #0b3b0b;
+  color: whitesmoke;
+  border: none;
+}
+
+.order-layout .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.order-layout .green-bg {
+  border-radius: 5px;
+  margin-right: 15px;
+  padding: 10px;
+  font-size: 20px;
+}

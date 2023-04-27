@@ -1,0 +1,120 @@
+#product-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 40px 0;
+  width: 1090px;
+  margin: 0 auto;
+  height: 37rem;
+  overflow: hidden;
+}
+
+#product-container .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 29px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 1090px;
+  height: 100%;
+  padding: 40px 0;
+}
+
+.card-container {
+  position: absolute;
+  display: flex;
+  left: 0px;
+  top: 0px;
+  width: 1084px;
+
+  transition-property: left;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  transition-delay: 500ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.product {
+  position: relative;
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+.product .animated {
+  /*추가*/
+  transition: 0.5s ease-out;
+}
+
+.product div {
+  overflow: hidden;
+  height: 330px;
+  width: 251px;
+}
+
+.product img {
+  object-fit: cover;
+  height: 100%;
+  transition: transform 1s;
+}
+
+.product img:hover {
+  transform: scale(1.1);
+  transition: transform 1s;
+}
+
+.product-name {
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 400;
+  margin: 20px 0 8px;
+}
+
+.product-price {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+#product-container .prev,
+#product-container .next {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #fafafa;
+  border-radius: 50%;
+  position: absolute;
+  top: 868px;
+  z-index: 1;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#product-container .prev {
+  left: 50%;
+  margin-left: -558px;
+}
+
+#product-container .next {
+  right: 50%;
+  margin-right: -547px;
+}
+
+#product-container .prev:hover,
+#product-container .next:hover {
+  background-color: #fff;
+  color: #333;
+}

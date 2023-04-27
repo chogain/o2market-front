@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오이마켓 상품 상세정보</title>
+
+  <!-- Google Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,200" />
+
+  <!---Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../../styles/global.css">
+  <link rel="stylesheet" href="../../components/layout/layout.css">
+
+  <!-- js -->
+  <script type="module" src="./index.js"></script>
+  <script type="module" src="../cart/modules.js"></script>
+</head>
+
+<body>
+  <header id="header"></header>
+  <main>
+    <section class="width">
+      <article class="product-container">
+        <figure class="product-main-img">
+        </figure>
+        <section class="product-detail">
+          <h1 class="product-name border-bottom bold"></h1>
+          <p class="product-price bold"></p>
+          <p class="review-count">총
+            <span class="review-counter font">0</span>건의 리뷰가 있습니다.
+          </p>
+          <div class="price">
+            <div class="count-box counter">
+              <div class="minus">-</div>
+              <p class="count">1</p>
+              <div class="plus">+</div>
+            </div>
+            <p class="total-price bold"></p>
+          </div>
+          <div class="btn-box">
+            <button class="cart-btn storage-btn green-bg pointer">장바구니</button>
+            <button class="payment-btn storage-btn bg-darkgreen pointer">바로 구매</button>
+          </div>
+        </section>
+      </article>
+
+      <section class="bottom-container">
+        <aside id="aside">
+          <figure class="product-main-img">
+          </figure>
+          <div class="product-name">제품명</div>
+          <div class="product-price bold"></div>
+          <div class="side-count">
+            <div class="side-count-text">구매수량</div>
+            <div class="count-box small-box">
+              <div class="minus">-</div>
+              <p class="count">1</p>
+              <div class="plus">+</div>
+            </div>
+          </div>
+          <div class="side-price-box">
+            <div class="side-price-text">구매가격</div>
+            <div class="total-price darkgreen bold">10,000원</div>
+          </div>
+          <div class="btn-box">
+            <button class="cart-btn storage-btn green-bg pointer">장바구니</button>
+            <button class="payment-btn storage-btn bg-darkgreen pointer">바로 구매</button>
+          </div>
+        </aside>
+
+        <article>
+          <nav class="detail-tab">
+            <div class="tab-list">
+              <a href="#tab1">상품설명</a>
+              <div>|</div>
+              <a href="#tab2">상품정보</a>
+              <div>|</div>
+              <a href="#tab3">상품평</a>
+              <div>|</div>
+              <a href="#tab4">상품문의</a>
+              <div>|</div>
+              <a href="#tab5">배송/반품/교환</a>
+            </div>
+          </nav>
+          <article id="tab1" class="tad-title">
+            <figure>
+              <img src="#" alt="상세정보 이미지">
+              <div class="description">상세정보이미지 넣을 자리</div>
+            </figure>
+          </article>
+          <article id="tab2" class="tad-title">
+            <p class="tad-text bold">상품정보</p>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="tb1">품목 또는 명칭</td>
+                  <td class="td2 product-name"></td>
+                </tr>
+                <tr>
+                  <td class="tb1">원산지(제조사)</td>
+                  <td class="tb2 company"></td>
+                </tr>
+                <tr>
+                  <td class=" tb1">제조년월일(포장일 또는 생산연도)</td>
+                  <td class="tb2">상품설명 참조</td>
+                </tr>
+                <tr>
+                  <td class="tb1">상품구성</td>
+                  <td class="tb2">상품 설명 참조</td>
+                </tr>
+                <tr>
+                  <td class="tb1">보관방법 또는 취급방법</td>
+                  <td class="tb2">상품 설명 참조</td>
+                </tr>
+                <tr>
+                  <td class="tb1">소비자상담 관련 전화번호</td>
+                  <td class="tb2">오이마켓 고객센터 00-0000-0000</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article id="tab3" class="tad-title">
+            <p class="tad-text review bold">상품평</p>
+            <div>총 <span class="font">0</span>개의 리뷰가 있습니다.</div>
+          </article>
+          <article id="tab4" class="tad-title">
+            <p class="tad-text bold">상품문의</p>
+          </article>
+          <article id="tab5" class="tad-title tad-text bold">배송/반품/교환</article>
+          <ol>
+            <li>배송기간
+              <p>13시 이전 주문/결재완료 주문: 당일 발송<br>
+                (지역별 교통상황, 영업소 사정에 따라 도착일/도착시간이 다를 수 있습니다.)</p>
+            </li>
+            <li>배송비
+              <p>40,000원 이상 무료배송 (40,000원 미만, 3,000원 별도 부과)</p>
+            </li>
+            <li>배송지역
+              <p>전국 (택배불가 지역 제외)</p>
+            </li>
+            <li>반품/교환 유효기간
+              <p>제품에 이상이 있을 경우 교환/반품은 상품 수령일로부터 2일 이내입니다.<br>
+                (단, 유통기한이 넘지 않은 제품과 개봉하지 않은 제품만 가능)</p>
+              <p></p>
+            </li>
+            <li>반품/교환 배송비용
+              <p>고객 단순 변심에 의한 교환/반품은 왕복 배송비 6,000원 고객 부담입니다.</p>
+            </li>
+          </ol>
+        </article>
+      </section>
+    </section>
+    <a href="#Top" class="top-btn">TOP</a>
+  </main>
+  <footer id="footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+.youtube {
+  position: relative;
+  height: 800px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.youtube .youtube-area {
+  width: 1200px;
+  position: absolute;
+  /* 16비율 */
+  left: 50%;
+  margin-left: calc(1200px / -2);
+  /* 9비율 */
+  top: 50%;
+  margin-top: calc(1200px * 9 / 16 / -2);
+}
+
+.youtube .youtube-area::before {
+  content: "";
+  display: block;
+  /* 16:9 영상 비율로 요소 크기 만들기! */
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+
+.youtube .youtube-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d6d6a02d;
+  /* background-image: url("../../assets/images/youtube-cover.png"); */
+}
+
+#player {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
