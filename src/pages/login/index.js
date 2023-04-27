@@ -47,7 +47,7 @@ function loginCheck(e) {
       // localStorage.setItem("token", JSON.stringify({ token: token }));
       localStorage.setItem("userId", data.userId); // 로컬 스토리지에 저장
       localStorage.setItem("token", data.token);
-      localStorage.setItem("Authorization", `Bearer ${token}`);
+      localStorage.setItem("Authorization", `Bearer ${data.token}`);
       // alert(userId);
       window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
       // alert(`로그인 토큰:${data.token}`);

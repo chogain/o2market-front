@@ -1,8 +1,8 @@
 const token = localStorage.getItem("Authorization");
 const userId = localStorage.getItem("userId");
 
-function updateMemberInformation(event) {
-  event.preventDefault(); // prevent the default form submit action
+function updateMemberInformation(e) {
+  e.preventDefault(); // prevent the default form submit action
 
   const nameInput = document.getElementById("name").value;
   const phoneInput = document.getElementById("phone").value;
