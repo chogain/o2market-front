@@ -1,6 +1,6 @@
 .width {
   width: 1100px;
-  margin: 120px auto 50px auto;
+  margin: 80px auto 50px auto;
 }
 
 .product-container {
@@ -117,7 +117,7 @@
 #aside {
   position: sticky;
   margin-left: auto;
-  top: 120px;
+  top: 80px;
   height: 750px;
   width: 251px;
   border: 1px solid #333;
@@ -150,7 +150,7 @@ aside img {
   align-items: center;
   border: 1px solid #333;
   border-radius: 5px;
-  background-color: #f5fbef;
+  background-color: #fff;
   height: 30px;
   width: 80px;
   margin-top: 2px;
@@ -366,4 +366,18 @@ dl > .text {
   margin-right: 15px;
   padding: 10px;
   font-size: 20px;
+}
+
+.description {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  margin: 30px 0;
+}
+
+img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%; /*추가*/
+  transition: transform 1s;
 }

@@ -132,6 +132,7 @@ header .inner .main-menu .item .item__contents {
   position: fixed;
   left: 0;
   display: none;
+  cursor: default;
 }
 
 header .inner .main-menu .item:hover .item__contents {

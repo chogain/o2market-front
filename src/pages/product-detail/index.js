@@ -15,109 +15,105 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-// const productId = "/5";
-
 // const http = "http://localhost:5500";
 const http = "";
 
-const pathArray = window.location.search.split("?");
-const productId = pathArray[pathArray.length - 1];
+const queryString = window.location.search;
 
-async function getData(productId) {
-  let response = await fetch(`/api/v1/products/${productId}`);
-  let data = await response.json();
-  return data;
-}
+// Further parsing:
+const params = new URLSearchParams(queryString);
+const productId = parseInt(params.get("productId"));
 
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
-const datas = await getData(productId);
-const productName = datas.productName;
-const imgUri = datas.imageUri;
-const description = datas.description;
-const price = datas.price;
-const company = datas.company;
-// 지금 이렇게 하면 index.html 나와서 주석처리 함
-// const productId = document.location.href.split("/");
-console.log(productId);
+fetch(`${http}/api/v1/products/${productId}`)
+  .then((response) => response.json())
+  .then((datas) => {
+    /* 상품 정보 할당 */
+    const productName = datas.productName;
+    const imgUri = datas.imageUri;
+    const description = datas.description;
+    const price = datas.price;
+    const company = datas.company;
 
-/* 동일한 클래스를 가진 태그에 동일한 데이터 삽입 */
-PutSameValueinSameClass(imgEls, `<img src="${imgUri}" alt="${productName}">`);
-PutSameValueinSameClass(productNameEls, productName);
-PutSameValueinSameClass(priceEls, addComma(price));
-for (let i = 0; i < totalPriceEls.length; i++) {
-  totalPriceEls[i].textContent = `${addComma(parseInt(price) * count)}원`;
-}
-$(".description").innerHTML = description;
-companyEl.innerHTML = company;
-
-/* 구매 수량 이벤트 등록 */
-minusBtns.forEach((minusBtn) => {
-  minusBtn.addEventListener("click", () => {
-    if (count <= 1) {
-      alert("최소 구매 수량은 1개 입니다.");
-      return;
+    /* 동일한 클래스를 가진 태그에 동일한 데이터 삽입 */
+    PutSameValueinSameClass(imgEls, `<img src="${imgUri}" alt="${productName}">`);
+    PutSameValueinSameClass(productNameEls, productName);
+    PutSameValueinSameClass(priceEls, addComma(price));
+    for (let i = 0; i < totalPriceEls.length; i++) {
+      totalPriceEls[i].textContent = `${addComma(parseInt(price) * count)}원`;
     }
+    $(".description").innerHTML = description;
+    companyEl.innerHTML = company;
 
-    count--;
-    countEls.forEach((countEl) => {
-      countEl.textContent = count;
+    /* 구매 수량 이벤트 등록 */
+    minusBtns.forEach((minusBtn) => {
+      minusBtn.addEventListener("click", () => {
+        if (count <= 1) {
+          alert("최소 구매 수량은 1개 입니다.");
+          return;
+        }
+
+        count--;
+        countEls.forEach((countEl) => {
+          countEl.textContent = count;
+        });
+        totalPriceEls.forEach((totalPriceEl) => {
+          totalPriceEl.textContent = `${addComma(parseInt(price) * count)}원`;
+        });
+      });
     });
-    totalPriceEls.forEach((totalPriceEl) => {
-      totalPriceEl.textContent = `${addComma(parseInt(price) * count)}원`;
+
+    plusBtns.forEach((plusBtn) => {
+      plusBtn.addEventListener("click", () => {
+        count++;
+        countEls.forEach((countEl) => {
+          countEl.textContent = count;
+        });
+        totalPriceEls.forEach((totalPriceEl) => {
+          totalPriceEl.textContent = `${addComma(parseInt(price) * count)}원`;
+        });
+      });
+    });
+
+    /* 장바구니 정보 local storage에 등록 */
+    $All(".cart-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // const url = window.location.href; // 현재 페이지 URL 가져오기
+        // const productId = url.substring(url.lastIndexOf("/") + 1);
+
+        let maxIndex = 0;
+        let sameProductIndex = -1;
+
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          const rawData = localStorage.getItem(key);
+          let data;
+          try {
+            data = JSON.parse(rawData);
+          } catch (e) {
+            console.error(`Invalid JSON string: ${rawData}`);
+            continue;
+          }
+          if (data.productName === productName) {
+            sameProductIndex = key;
+            break;
+          }
+          maxIndex = Math.max(maxIndex, Number(key));
+        }
+
+        const dataToSave = {
+          id: sameProductIndex !== -1 ? sameProductIndex : maxIndex + 1,
+          productName,
+          price,
+          count,
+          description,
+        };
+
+        localStorage.setItem(dataToSave.id, JSON.stringify(dataToSave));
+        alert("상품이 장바구니에 성공적으로 담겼습니다.");
+      });
     });
   });
-});
-
-plusBtns.forEach((plusBtn) => {
-  plusBtn.addEventListener("click", () => {
-    count++;
-    countEls.forEach((countEl) => {
-      countEl.textContent = count;
-    });
-    totalPriceEls.forEach((totalPriceEl) => {
-      totalPriceEl.textContent = `${addComma(parseInt(price) * count)}원`;
-    });
-  });
-});
-
-/* 장바구니 정보 local storage에 등록 */
-$All(".cart-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    // const url = window.location.href; // 현재 페이지 URL 가져오기
-    // const productId = url.substring(url.lastIndexOf("/") + 1);
-
-    let maxIndex = 0;
-    let sameProductIndex = -1;
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const rawData = localStorage.getItem(key);
-      let data;
-      try {
-        data = JSON.parse(rawData);
-      } catch (e) {
-        console.error(`Invalid JSON string: ${rawData}`);
-        continue;
-      }
-      if (data.productName === productName) {
-        sameProductIndex = key;
-        break;
-      }
-      maxIndex = Math.max(maxIndex, Number(key));
-    }
-
-    const dataToSave = {
-      id: sameProductIndex !== -1 ? sameProductIndex : maxIndex + 1,
-      productName,
-      price,
-      count,
-      description,
-    };
-
-    localStorage.setItem(dataToSave.id, JSON.stringify(dataToSave));
-    alert("상품이 장바구니에 성공적으로 담겼습니다.");
-  });
-});
 
 /* 상품 정보 form */
 const order = `
