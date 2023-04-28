@@ -150,7 +150,7 @@ aside img {
   align-items: center;
   border: 1px solid #333;
   border-radius: 5px;
-  background-color: #f5fbef;
+  background-color: #fff;
   height: 30px;
   width: 80px;
   margin-top: 2px;
@@ -366,4 +366,11 @@ dl > .text {
   margin-right: 15px;
   padding: 10px;
   font-size: 20px;
+}
+
+.description {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  margin: 30px 0;
 }
