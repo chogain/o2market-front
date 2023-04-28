@@ -144,7 +144,7 @@ function renderProductList(data) {
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
       console.log(productId);
-      window.location.href = `../product-detail/index.html/${productId}`;
+      window.location.href = `../product-detail/index.html?${productId}`;
     });
   }
 }
