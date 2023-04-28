@@ -155,7 +155,7 @@ header .inner .main-menu .item .item__contents .contents__menu > ul > li h4 {
   color: #fff;
 }
 
-header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li {
+header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li a {
   padding: 5px 0;
   font-size: 12px;
   color: #999;

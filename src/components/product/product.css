@@ -63,6 +63,7 @@
 .product img {
   object-fit: cover;
   height: 100%;
+  width: 100%; /*추가*/
   transition: transform 1s;
 }
 
@@ -91,7 +92,7 @@
   border: 2px solid #fafafa;
   border-radius: 50%;
   position: absolute;
-  top: 868px;
+  top: 1216px;
   z-index: 1;
   cursor: pointer;
   outline: none;
@@ -110,7 +111,7 @@
 
 #product-container .next {
   right: 50%;
-  margin-right: -547px;
+  margin-right: -554px;
 }
 
 #product-container .prev:hover,

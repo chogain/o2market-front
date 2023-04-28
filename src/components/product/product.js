@@ -35,7 +35,7 @@ export default async function ProductCard() {
   const productCardList = productData.map(
     (product) =>
       `<li class="product">
-        <a href="#">
+        <a href="/products/${product.productId}">
           <div><img src=${product.imageUri} alt=${product.description}></div>
           <h3 class="product-name">${product.productName}</h3>
           <p class="product-price">${product.price}</p>
