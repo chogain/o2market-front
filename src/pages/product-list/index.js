@@ -13,8 +13,8 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
-// const http = "http://localhost:5500";
-const http = "";
+const http = "http://localhost:5500";
+// const http = "";
 
 // json 데이터 불러오기
 fetch(`${http}/api/v1/products`)
