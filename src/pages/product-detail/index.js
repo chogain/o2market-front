@@ -19,9 +19,16 @@ let count = parseInt(countEls[0].textContent);
 // const productId = "/5";
 
 const http = "";
-const pathArray = window.location.pathname.substring(1).split("/");
-const productId = pathArray[pathArray.length - 1];
-// const productId = window.location.pathname.substring(1);
+// const pathArray = window.location.pathname.substring(1).split("/");
+// const productId = window.location.search;
+// pathArray[pathArray.length - 1];
+// // const productId = window.location.pathname.substring(1);
+
+const queryString = window.location.search;
+
+// Further parsing:
+const params = new URLSearchParams(queryString);
+const productId = parseInt(params.get("productId"));
 
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
 fetch(`${http}/api/v1/products/${productId}`)
