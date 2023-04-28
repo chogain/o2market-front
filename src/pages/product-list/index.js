@@ -16,7 +16,7 @@ const sortABC = $("#abc-btn");
 const http = "http://localhost:5500";
 // const http = "";
 
-// json 데이터 불러오기
+/* DB에 저장된 모든 상품을 불러와 신상품순으로 정렬(기본) */
 fetch(`${http}/api/v1/products`)
   .then((res) => res.json())
   .then((datas) => {
@@ -26,7 +26,7 @@ fetch(`${http}/api/v1/products`)
     findProductId(sortedData);
   });
 
-// 상품 생성하여 html에 삽입하는 함수
+/* html에 상품 정보 삽입하는 함수 */
 function insertData(datas) {
   container.innerHTML = "";
   countProduct.innerHTML = datas.length;
@@ -43,13 +43,13 @@ function insertData(datas) {
   });
 }
 
-// 클릭한 버튼 css 토글하는 함수
+/* 버튼 css 토글하는 함수 */
 function toggleClass(findhaveClass, El, willtoggledClass) {
   $(findhaveClass).classList.remove(willtoggledClass);
   El.classList.add(willtoggledClass);
 }
 
-// 카테고리 필터해서 필터된 데이터 반환하는 함수
+/* 카테고리 필터해서 필터된 데이터 반환하는 함수 */
 function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
   button.addEventListener("click", () => {
     toggleClass(findhaveClass, El, willtoggledClass);
@@ -69,7 +69,7 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
   });
 }
 
-// 카테고리 찾아 필터된 데이터 리턴하는 함수
+/* 카테고리 찾아 필터된 데이터 리턴하는 함수 */
 function categoryData(category) {
   return fetch(`${http}/api/v1/products`)
     .then((res) => res.json())
@@ -81,18 +81,7 @@ function categoryData(category) {
     });
 }
 
-// 전체버튼 클릭시 이벤트 등록
-fetch(`${http}/api/v1/products`)
-  .then((res) => res.json())
-  .then((datas) =>
-    filterTotal.addEventListener("click", () => {
-      toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
-      insertData(datas);
-      findProductId(datas);
-    }),
-  );
-
-// 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록
+/* 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록 */
 categoryFilter(filterVegetable, 1, ".bg-darkgreen", filterVegetable, "bg-darkgreen");
 categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
 
@@ -110,7 +99,7 @@ async function findCategory() {
   return dataBox;
 }
 
-// 정렬 방식 클릭 시 카테고리 확인 후 해당하는 데이터만 정렬하는 이벤트 등록
+/* 정렬 방식 클릭 시 카테고리 확인 후 해당하는 데이터만 정렬하는 이벤트 등록 */
 const sortData = async (sortedTag, sortFunc) => {
   toggleClass(".font", sortedTag, "font");
   const foundCategory = await findCategory();
@@ -144,7 +133,7 @@ function findProductId(data) {
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
       console.log(productId);
-      window.location.href = "../product-detail/index.html";
     });
+    window.location.href = "/product-detail/index.html";
   }
 }
