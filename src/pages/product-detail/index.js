@@ -182,7 +182,7 @@ $All(".payment-btn").forEach((btn) => {
         body: JSON.stringify({
           orderItems: [
             {
-              productId: productId.substring(1),
+              productId: productId,
               quantity: quantity,
               price: price,
               productName: productNameEls[0].innerHTML,
