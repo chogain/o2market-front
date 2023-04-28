@@ -1,8 +1,8 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
-// const http = "http://localhost:5500";
-const http = "";
+const http = "http://localhost:5500";
+// const http = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = $(".add-order");
@@ -212,19 +212,21 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#order-total-price").innerHTML = $("#total-price").innerHTML;
       const userId = localStorage.getItem("userId"); // 주문 조회할 ID
       const token = localStorage.getItem("token"); // 사용자 토큰
+      alert(token);
       $(".close").addEventListener("click", () => {
         $("main").removeChild(orderEl);
       });
 
       $("#order-submit-button").addEventListener("click", () => {
-        console.log(
-          JSON.stringify({
-            orderItems: orderItems,
-            orderAddr: $("#address").value,
-            deliveryState: 0,
-            deleteFlag: false,
-          }),
-        );
+        // console.log(
+        //   JSON.stringify({
+        //     orderItems: orderItems,
+        //     orderAddr: $("#address").value,
+        //     deliveryState: 0,
+        //     deleteFlag: false,
+        //   }),
+        // );
+        // alert(token);
         fetch(`${http}/api/v1/orders/${userId}`, {
           method: "POST",
           headers: {
@@ -239,10 +241,12 @@ document.addEventListener("DOMContentLoaded", function () {
           }),
         })
           .then((response) => {
+            alert(token);
             /* 서버 응답 처리 */
             if (response.ok) {
               alert("결재 완료 되었습니다.");
-              window.location.href = "/api/v1/orders/${userId}";
+              alert(token);
+              // window.location.href = `${http}/pages/orderCompleted${userId}`;
               console.log("결재 완료");
             } else {
               alert(`결재 실패
