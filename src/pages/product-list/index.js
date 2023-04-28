@@ -1,4 +1,5 @@
 const $ = (selector) => document.querySelector(selector);
+const $All = (selector) => document.querySelectorAll(selector);
 
 // 생성한 태그 삽입할 컨테이너
 const container = $("#productContainer");
@@ -12,12 +13,17 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
+// const http = "http://localhost:5500";
+const http = "";
+
 // json 데이터 불러오기
-fetch("/api/v1/products")
+fetch(`${http}/api/v1/products`)
   .then((res) => res.json())
   .then((datas) => {
     console.log(datas);
-    insertData(datas);
+    const sortedData = datas.sort((a, b) => b.productId - a.productId);
+    insertData(sortedData);
+    findProductId(sortedData);
   });
 
 // 상품 생성하여 html에 삽입하는 함수
@@ -48,21 +54,24 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
   button.addEventListener("click", () => {
     toggleClass(findhaveClass, El, willtoggledClass);
 
-    fetch("/api/v1/products")
+    fetch(`${http}/api/v1/products`)
       .then((res) => res.json())
       .then((datas) => {
         container.innerHTML = "";
         const dataBox = datas.filter((data) => {
           return data.category === category;
         });
-        return insertData(dataBox);
+        toggleClass(".font", sortNew, "font");
+        const sortedData = dataBox.sort((a, b) => b.productId - a.productId);
+        findProductId(sortedData);
+        return insertData(sortedData);
       });
   });
 }
 
 // 카테고리 찾아 필터된 데이터 리턴하는 함수
 function categoryData(category) {
-  return fetch("/api/v1/products")
+  return fetch(`${http}/api/v1/products`)
     .then((res) => res.json())
     .then((datas) => {
       const dataBox = datas.filter((data) => {
@@ -73,7 +82,7 @@ function categoryData(category) {
 }
 
 // 전체버튼 클릭시 이벤트 등록
-fetch("/api/v1/products")
+fetch(`${http}/api/v1/products`)
   .then((res) => res.json())
   .then((datas) =>
     filterTotal.addEventListener("click", () => {
@@ -89,7 +98,7 @@ categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
 async function findCategory() {
   let dataBox;
   if (filterTotal.classList.contains("bg-darkgreen")) {
-    const res = await fetch("/api/v1/products");
+    const res = await fetch(`${http}/api/v1/products`);
     const datas = await res.json();
     dataBox = datas;
   } else if (filterVegetable.classList.contains("bg-darkgreen")) {
@@ -124,4 +133,15 @@ sortABC.addEventListener("click", () =>
 /* 가격에 ,(쉼표) 삽입 */
 function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function findProductId(data) {
+  const products = $All(".product");
+  for (let i = 0; i <= products.length; i++) {
+    console.log(products.productName);
+    products[i].addEventListener("click", () => {
+      const productId = data[i].productId;
+      window.location.href = `${http}/api/v1/products${productId}`;
+    });
+  }
 }
