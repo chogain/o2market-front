@@ -7,7 +7,7 @@ export default async function Header() {
       
       <ul class="main-menu">
         <li class="item">
-          <div class="item__name vegetable">  <a href="../../pages/product-list">채소</a></div>
+          <div class="item__name vegetable">채소</div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner category">
@@ -32,7 +32,7 @@ export default async function Header() {
           </div>
         </li>
         <li class="item">
-          <div class="item__name fruit"><a href="../../pages/product-list">과일</a></div>
+          <div class="item__name fruit">과일</div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
