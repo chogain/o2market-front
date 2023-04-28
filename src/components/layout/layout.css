@@ -99,6 +99,7 @@ header .inner .main-menu .item .item__name {
   padding: 10px 12px 30px 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
+  cursor: default;
 }
 
 header .inner .main-menu .item .item__name::after {
@@ -144,6 +145,7 @@ header .inner .main-menu .item .item__contents .contents__menu {
 header .inner .main-menu .item .item__contents .contents__menu > ul {
   display: flex;
   padding: 20px;
+  cursor: default;
 }
 
 header .inner .main-menu .item .item__contents .contents__menu > ul > li {
@@ -165,12 +167,6 @@ header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li a
 
 header .inner .main-menu .item .item__contents .contents__menu > ul > li ul li:hover {
   color: #86b404;
-}
-
-.item__name:hover a {
-  background-color: #292a0a;
-  color: #fff;
-  border-radius: 6px 6px 0 0;
 }
 
 /* footer */
