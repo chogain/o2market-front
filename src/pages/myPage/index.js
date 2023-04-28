@@ -1,4 +1,3 @@
-const topBtn = document.querySelector(".top-btn");
 const token = localStorage.getItem("Authorization");
 const userId = localStorage.getItem("userId");
 
@@ -81,7 +80,7 @@ fetch(`/api/v1/orders/${userId}`, {
   });
 
 // 주문 상태 받아오기
-// http://localhost:5500/api/v1/orders/${userId}
+//localhost:5500/api/v1/orders/${userId}
 fetch(`/api/v1/orders/${userId}`, {
   method: "GET",
   headers: {
@@ -122,20 +121,51 @@ fetch(`/api/v1/orders/${userId}`, {
       // "최근 주문내역이 없습니다." 문구 제거
       const orderStateDivHeader = document.getElementById("orderStateDivHeader");
       orderStateDiv.removeChild(orderStateDivHeader);
+
+      // 삭제 버튼 디스플레이 block으로 변경
+      const deleteOrderButton = document.getElementById("deleteOrderButton");
+      deleteOrderButton.style.display = "block";
     }
   })
   .catch((error) => {
     console.error("Error fetching user information:", error);
   });
 
-// const button = document.getElementById("myButton");
-// button.addEventListener("click", () => {
-//   window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
-// });
+function deleteOrder(e) {
+  e.preventDefault();
+
+  // 확인 메시지 표시
+  const confirmed = confirm("정말 주문을 삭제하시겠습니까?");
+
+  if (confirmed) {
+    // http://localhost:5500/api/v1/orders/${userId}
+    fetch(`/api/v1/orders/${userId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `${token}`, // 로그인 토큰
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //버튼 삭제
+        const deleteButton = document.getElementById("deleteOrderButton");
+        deleteButton.style.display = "none";
+
+        // 페이지 새로고침
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting user orders:", error);
+      });
+  }
+}
+
 //주문취소
 // const orderId = ;
 
-// fetch(`http://localhost:5500/api/v1/orders/${userId}/${orderId}`, {
+// fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
 //   method: "DELETE",
 //   headers: {
 //     Authorization: `${token}`, // 로그인 토큰
