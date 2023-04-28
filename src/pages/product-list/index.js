@@ -87,6 +87,7 @@ fetch("http://localhost:5500/api/v1/products")
   .then((datas) =>
     filterTotal.addEventListener("click", () => {
       toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
+      toggleClass(".font", sortNew, "font");
       insertData(datas);
     }),
   );
