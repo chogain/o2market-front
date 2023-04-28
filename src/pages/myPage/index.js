@@ -134,6 +134,37 @@ fetch(`/api/v1/orders/${userId}`, {
     console.error("Error fetching user information:", error);
   });
 
+function deleteOrder(e) {
+  e.preventDefault();
+
+  // 확인 메시지 표시
+  const confirmed = confirm("정말 주문을 삭제하시겠습니까?");
+
+  if (confirmed) {
+    // http://localhost:5500/api/v1/orders/${userId}
+    fetch(`/api/v1/orders/${userId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `${token}`, // 로그인 토큰
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //버튼 삭제
+        const deleteButton = document.getElementById("deleteOrderButton");
+        deleteButton.style.display = "none";
+
+        // 페이지 새로고침
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting user orders:", error);
+      });
+  }
+}
+
 //주문취소
 // const orderId = ;
 
