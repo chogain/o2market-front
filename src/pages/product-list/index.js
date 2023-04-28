@@ -139,11 +139,12 @@ function addComma(price) {
 
 function findProductId(data) {
   const products = $All(".product");
-  for (let i = 0; i <= products.length; i++) {
-    console.log(products.productName);
+  console.log(products.length);
+  for (let i = 0; i < products.length; i++) {
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
-      window.location.href = `${http}/pages/product-detail${productId}`;
+      console.log(productId);
+      window.location.href = "../product-detail/index.html";
     });
   }
 }
