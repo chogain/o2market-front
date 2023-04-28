@@ -3,22 +3,22 @@
 #headerOne {
   display: flex;
   justify-content: center;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   margin: 0.67em 0;
 }
 
-/************* 회원정보틀 css *****************/
-
+/************* 회원가입 css *****************/
 .holeMemberFormDiv {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 80px;
 }
 
 .memberFormDiv {
-  background-color: rgb(171, 245, 170);
+  /* background-color: rgb(171, 245, 170); */
   width: 450px;
+  margin: 90px;
 }
 
 .memberFormDiv h1 {
@@ -36,7 +36,7 @@
 }
 
 .memberFormDiv input:last-child {
-  background-color: rgb(64, 187, 125);
+  background-color: #7fab4dbb;
   margin-top: 20px;
 }
 

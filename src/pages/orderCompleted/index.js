@@ -2,12 +2,21 @@ const userId = localStorage.getItem("userId"); // 주문 조회할 ID
 const token = localStorage.getItem("token"); // 사용자 토큰
 
 if (!token) {
-  window.location.href = "/login"; // 로그인 페이지 URL 넣기
+  window.location.href = "../login/index.html"; // 로그인 페이지 URL 넣기
+}
+
+function getCurrentDateTime() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, "0");
+  const date = now.getDate().toString().padStart(2, "0");
+
+  return `${year}-${month}-${date}`;
 }
 
 async function loadOrderCompleted() {
   try {
-    const response = await fetch(`http://localhost:5500/api/v1/orders/${userId}`, {
+    const response = await fetch(`/api/v1/orders/${userId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -30,10 +39,10 @@ async function loadOrderCompleted() {
       orderNumberElem.innerHTML = order._id; // order.id
     }
 
-    // 주문일시 표시
+    //주문일시 표시
     const orderDateElem = document.querySelector("#orderDate");
     if (orderDateElem) {
-      orderDateElem.innerHTML = new Date(order.createdAt).toLocaleString();
+      orderDateElem.innerHTML = getCurrentDateTime();
     }
 
     // 상품정보 및 결제금액 표시
@@ -48,7 +57,7 @@ async function loadOrderCompleted() {
         <li>
           <span>${item.productName}</span>
           <span>${item.quantity}개</span>
-          <span>${+totalItemPrice.toLocaleString()}원</span>
+          <span>${item.price.toLocaleString()}원</span>
         </li>`;
       itemsContainer.insertAdjacentHTML("beforeend", itemHtml);
     });
@@ -57,6 +66,11 @@ async function loadOrderCompleted() {
     const totalPriceElem = document.querySelector("#totalPayment");
     if (totalPriceElem) {
       totalPriceElem.innerHTML = `${(+totalPrice + 3000).toLocaleString()}원`;
+    }
+
+    const orderAddressElem = document.querySelector("#orderAddress");
+    if (orderAddressElem) {
+      orderAddressElem.innerHTML = order.orderAddr;
     }
   } catch (error) {
     console.error("주문 정보를 가져오는 도중 오류가 발생했습니다.", error);

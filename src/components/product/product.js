@@ -1,10 +1,11 @@
 const mainProductSlide = document.querySelector("#product-recommendation-slide");
 
 async function getData() {
-  let response = await fetch("http://localhost:5500/api/v1/products");
+  let response = await fetch("/api/v1/products");
   let data = await response.json();
   return data;
 }
+
 export default async function ProductCard() {
   const productData = await getData();
 
@@ -16,7 +17,6 @@ export default async function ProductCard() {
       <div class="carousel-wrapper">
         <ul class="card-container slides">
       </div>
-
        <div class="prev">
       <span class="material-symbols-outlined">
         chevron_left
@@ -35,7 +35,7 @@ export default async function ProductCard() {
   const productCardList = productData.map(
     (product) =>
       `<li class="product">
-        <a href="#">
+        <a href="../../pages/product-detail/index.html?${product.productId}">
           <div><img src=${product.imageUri} alt=${product.description}></div>
           <h3 class="product-name">${product.productName}</h3>
           <p class="product-price">${product.price}</p>
