@@ -63,8 +63,8 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
         });
         toggleClass(".font", sortNew, "font");
         const sortedData = dataBox.sort((a, b) => b.productId - a.productId);
+        insertData(sortedData);
         findProductId(sortedData);
-        return insertData(sortedData);
       });
   });
 }
@@ -88,6 +88,7 @@ fetch(`${http}/api/v1/products`)
     filterTotal.addEventListener("click", () => {
       toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
       insertData(datas);
+      findProductId(datas);
     }),
   );
 
@@ -115,6 +116,7 @@ const sortData = async (sortedTag, sortFunc) => {
   const foundCategory = await findCategory();
   const sortedData = foundCategory.sort(sortFunc);
   insertData(sortedData);
+  findProductId(sortedData);
 };
 
 sortNew.addEventListener("click", () =>
@@ -141,7 +143,7 @@ function findProductId(data) {
     console.log(products.productName);
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
-      window.location.href = `${http}/api/v1/products${productId}`;
+      window.location.href = `${http}/pages/product-detail${productId}`;
     });
   }
 }

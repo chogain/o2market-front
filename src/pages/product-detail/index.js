@@ -18,12 +18,16 @@ let count = parseInt(countEls[0].textContent);
 /* 현재 열린 URL에서 뒤에 오는 값을 가져옵니다. */
 // const productId = window.location.pathname.split("/").pop();
 
-const productId = window.location.pathname;
-// const http = "http://localhost:5500";
-const http = "";
+// const productId = window.location.pathname;
+const http = "http://localhost:5500";
+const productId = "/5";
+// const http = "";
 
+//localhost:5500/api/v1/products/5
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
-fetch(`/api/v1/products${productId}`)
+// fetch(`${http}/pages/product-detail${productId}`)
+// fetch(`${http}/api/v1/products$
+fetch(`${http}/api/v1/products${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -175,7 +179,7 @@ $All(".payment-btn").forEach((btn) => {
       console.log(`productName: ${productNameEls[0].innerHTML}`);
       console.log(`orderAddr: ${$("#address").value}`);
       console.log(productId);
-      fetch(`${http}/api/v1/orders/${userId}`, {
+      fetch(`${http}/pages/product-detail${productId}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
