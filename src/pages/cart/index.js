@@ -1,8 +1,8 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
-const http = "http://localhost:5500";
-// const http = "";
+// const http = "http://localhost:5500";
+const http = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = $(".add-order");
