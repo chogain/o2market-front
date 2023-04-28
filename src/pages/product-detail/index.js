@@ -18,15 +18,15 @@ let count = parseInt(countEls[0].textContent);
 /* 현재 열린 URL에서 뒤에 오는 값을 가져옵니다. */
 // const productId = window.location.pathname.split("/").pop();
 
-// const http = "http://localhost:5500";
-// const productId = "/5";
+const http = "http://localhost:5500";
+const productId = "/5";
 
-const http = "";
-const productId = window.location.pathname;
+// const http = "";
+// const productId = window.location.pathname.substring(1);
 
 //localhost:5500/api/v1/products/5
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
-fetch(`${http}/api/v1/products${productId}`)
+fetch(`${http}/api/v1/products/${productId}`)
   // fetch(`${http}/api/v1/products$
   // fetch(`${http}/api/v1/products${productId}`)
   .then((response) => response.json())
