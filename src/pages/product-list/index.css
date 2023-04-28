@@ -84,6 +84,7 @@
 .product img {
   object-fit: cover;
   height: 100%;
+  width: 100%; /*추가*/
   transition: transform 1s;
 }
 
@@ -112,11 +113,4 @@
   padding-right: 15px;
   text-align: right;
   font-size: 20px;
-}
-
-.product img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%; /*추가*/
-  transition: transform 1s;
 }
