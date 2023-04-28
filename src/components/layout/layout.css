@@ -99,7 +99,6 @@ header .inner .main-menu .item .item__name {
   padding: 10px 12px 30px 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
-  cursor: default;
 }
 
 header .inner .main-menu .item .item__name::after {
