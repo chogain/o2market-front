@@ -16,17 +16,11 @@ const totalPriceEls = $All(".total-price");
 let count = parseInt(countEls[0].textContent);
 
 // const http = "http://localhost:5500";
-// const productId = "/5";
-
 const http = "";
-// const pathArray = window.location.pathname.substring(1).split("/");
-// const productId = window.location.search;
-// pathArray[pathArray.length - 1];
-// // const productId = window.location.pathname.substring(1);
 
 const queryString = window.location.search;
 
-// Further parsing:
+// // Further parsing:
 const params = new URLSearchParams(queryString);
 const productId = parseInt(params.get("productId"));
 
