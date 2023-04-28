@@ -86,7 +86,7 @@ function categoryData(category) {
 
 // 전체버튼 클릭시 이벤트 등록
 filterTotal.addEventListener("click", () => {
-  fetch("http://localhost:5500/api/v1/products")
+  fetch(`${http}/api/v1/products`)
     .then((res) => res.json())
     .then((datas) => {
       toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
