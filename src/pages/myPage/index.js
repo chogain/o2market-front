@@ -100,19 +100,22 @@ fetch(`/api/v1/orders/${userId}`, {
 
       data.forEach((order) => {
         // 주문에 대한 정보를 담은 HTML 요소 생성
-        const orderItem = document.createElement("li");
+        order.orderItems.forEach((orderItem, index) => {
+          const orderItemIndex = index + 1;
+          const orderItemElement = document.createElement("li");
 
-        let deliveryStateText;
-        if (order.deliveryState === 0) {
-          deliveryStateText = "배송준비중";
-        } else if (order.deliveryState === 1) {
-          deliveryStateText = "배송중";
-        } else if (order.deliveryState === 2) {
-          deliveryStateText = "배송완료";
-        }
+          let deliveryStateText;
+          if (order.deliveryState === 0) {
+            deliveryStateText = "배송준비중";
+          } else if (order.deliveryState === 1) {
+            deliveryStateText = "배송중";
+          } else if (order.deliveryState === 2) {
+            deliveryStateText = "배송완료";
+          }
 
-        orderItem.textContent = `${order.orderItems[0].productName} - ${order.orderItems[0].quantity}개, ${order.orderItems[0].price}원 (${deliveryStateText})`;
-        orderList.appendChild(orderItem);
+          orderItemElement.textContent = `${orderItem.productName} - ${orderItem.quantity}개, ${orderItem.price}원 (${deliveryStateText})`;
+          orderList.appendChild(orderItemElement);
+        });
       });
 
       // 주문 정보를 담은 HTML 요소를 div에 추가
@@ -130,37 +133,6 @@ fetch(`/api/v1/orders/${userId}`, {
   .catch((error) => {
     console.error("Error fetching user information:", error);
   });
-
-function deleteOrder(e) {
-  e.preventDefault();
-
-  // 확인 메시지 표시
-  const confirmed = confirm("정말 주문을 삭제하시겠습니까?");
-
-  if (confirmed) {
-    // http://localhost:5500/api/v1/orders/${userId}
-    fetch(`/api/v1/orders/${userId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `${token}`, // 로그인 토큰
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        //버튼 삭제
-        const deleteButton = document.getElementById("deleteOrderButton");
-        deleteButton.style.display = "none";
-
-        // 페이지 새로고침
-        location.reload();
-      })
-      .catch((error) => {
-        console.error("Error deleting user orders:", error);
-      });
-  }
-}
 
 //주문취소
 // const orderId = ;
