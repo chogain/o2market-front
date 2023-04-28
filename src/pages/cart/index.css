@@ -81,7 +81,7 @@
 .minus {
   padding: 1px 12px 3px 12px;
   font-size: 22px;
-  background-color: rgb(242, 242, 242);
+  background-color: whitesmoke;
   border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;
@@ -90,7 +90,7 @@
 .plus {
   padding: 5px 10px 5px 10px;
   font-size: 18px;
-  background-color: rgb(242, 242, 242);
+  background-color: whitesmoke;
   border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;
