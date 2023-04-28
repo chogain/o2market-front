@@ -111,7 +111,7 @@ fetch(`/api/v1/orders/${userId}`, {
           deliveryStateText = "배송완료";
         }
 
-        orderItem.textContent = `${order.orderItems.productName} - ${order.orderItems.quantity}개, ${order.orderItems.price}원 (${deliveryStateText})`;
+        orderItem.textContent = `${order.orderItems[0].productName} - ${order.orderItems[0].quantity}개, ${order.orderItems[0].price}원 (${deliveryStateText})`;
         orderList.appendChild(orderItem);
       });
 
