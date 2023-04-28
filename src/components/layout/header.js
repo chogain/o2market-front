@@ -1,7 +1,7 @@
 // body 태그 아래 <header id="header"></header> 생성
-export default function Header() {
+export default async function Header() {
   const header = document.querySelector("header");
-  // <a href="/" class="title">오이마켓</a>
+
   header.innerHTML = `
     <div class="inner">
       
@@ -10,51 +10,22 @@ export default function Header() {
           <div class="item__name vegetable">  <a href="../../pages/product-list">채소</a></div>
           <div class="item__contents">
             <div class="contents__menu">
-              <ul class="inner">
+              <ul class="inner category">
                 <li>
                   <h4>잎채소</h4>
-                  <ul>
-                    <!-- <li><a href="/product/1">양상추</a></li> -->
-                    <li><a href="/product/2">양배추</a></li>
-                    <li><a href="/product/3">시금치</a></li>
-                    <li><a href="/product/4">파슬리</a></li>
-                    <li><a href="/product/5">청경채</a></li>
-                  
-                  
-                  </ul>
+                  <ul class="vegetable-category"></ul>
                 </li>
                 <li>
                   <h4>열매채소</h4>
-                  <ul>
-                    <li><a href="/product/10">파프리카</a></li>
-                    <li><a href="/product/11">가지</a></li>
-                    <li><a href="/product/12">청피망</a></li>
-                    <li><a href="/product/13">홍고추</a></li>
-                    <li><a href="/product/14">고추</a></li>
-                    <li><a href="/product/15">완두콩</a></li>
-                    
-                  </ul>
+                  <ul class="vegetable-category2"></ul>
                 </li>
                 <li>
                   <h4>뿌리채소</h4>
-                  <ul>
-                    <li><a href="/product/5">양파</a></li>
-                    <li><a href="/product/5">자색양파</a></li>
-                    <li><a href="/product/5">통마늘</a></li>
-                    <li><a href="/product/5">새척당근</a></li>
-                    <li><a href="/product/5">고구마</a></li>
-              
-
-                  </ul>
+                  <ul class="vegetable-category3"></ul>
                 </li>
                 <li>
                   <h4>버섯</h4>
-                  <ul>
-                    <li><a href="/product/5">양송이버섯</a></li>
-                    <li><a href="/product/5">표고버섯</a></li>
-                    <li><a href="/product/5">새송이섯</a></li>
-                    <li><a href="/product/5">팽이버섯</a></li>
-                  </ul>
+                  <ul class="vegetable-category4"></ul>
                 </li>
               </ul>
             </div>
@@ -67,23 +38,7 @@ export default function Header() {
               <ul class="inner">
                 <li>
                   <h4>생과일</h4>
-                  <ul>
-                    <li><a href="/product/5">블루베리</a></li>
-                    <li><a href="/product/5">오렌지</a></li>
-                    <li><a href="/product/5">토마토</a></li>
-                    <li><a href="/product/5">천도복숭아</a></li>
-                    <li><a href="/product/5">키위</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <h4>열대 과일</h4>
-                  <ul>
-                    <li><a href="/product/5">납작복숭아</a></li>
-                    <li><a href="/product/5">메론</a></li>
-                    <li><a href="/product/5">바나나</a></li>
-                    <li><a href="/product/5">아보카도</a></li>
-                    <li><a href="/product/5">체리</a></li>
-                  </ul>
+                  <ul class="fruit-category"></ul>
                 </li>
               </ul>
             </div>
@@ -112,4 +67,101 @@ export default function Header() {
       </div>
     </div>
 `;
+
+  const productData = await getData();
+
+  const vegetables = productData.filter((product) => product.category === 1); // 잎채소
+  const vegetables2 = productData.filter((product) => product.category === 2); // 열매채소
+  const vegetables3 = productData.filter((product) => product.category === 3); // 뿌리채소
+  const vegetables4 = productData.filter((product) => product.category === 4); // 버섯
+  const fruits = productData.filter((product) => product.category === 5); // 생과일
+
+  const vegetableCategory = document.querySelector(".vegetable-category");
+  const vegetableCategory2 = document.querySelector(".vegetable-category2");
+  const vegetableCategory3 = document.querySelector(".vegetable-category3");
+  const vegetableCategory4 = document.querySelector(".vegetable-category4");
+  const fruitCategory = document.querySelector(".fruit-category");
+
+  const vegetableProducts = vegetables.map(
+    (vegetable) =>
+      `
+      <li>
+        <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+          ${vegetable.productName.match(/^\D+/)}
+        </a>
+      </li>
+    `,
+  );
+
+  vegetableCategory.innerHTML = vegetableProducts.join("");
+
+  const vegetableProducts2 = vegetables2.map(
+    (vegetable) =>
+      `
+      <li>
+         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+          ${vegetable.productName.match(/^\D+/)}
+        </a>
+      </li>
+    `,
+  );
+
+  vegetableCategory2.innerHTML = vegetableProducts2.join("");
+
+  const vegetableProducts3 = vegetables3.map(
+    (vegetable) =>
+      `
+      <li>
+         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+          ${vegetable.productName.match(/^\D+/)}
+        </a>
+      </li>
+    `,
+  );
+
+  vegetableCategory3.innerHTML = vegetableProducts3.join("");
+
+  const vegetableProducts4 = vegetables4.map(
+    (vegetable) =>
+      `
+      <li>
+         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+          ${vegetable.productName.match(/^\D+/)}
+        </a>
+      </li>
+    `,
+  );
+
+  vegetableCategory4.innerHTML = vegetableProducts4.join("");
+
+  const fruitProducts = fruits.map(
+    (fruit) =>
+      `
+      <li>
+        <a href="../../pages/product-detail/index.html/${fruit.productId}">
+          ${fruit.productName.match(/^\D+/)}
+        </a>
+      </li>
+    `,
+  );
+  fruitCategory.innerHTML = fruitProducts.join("");
 }
+
+async function getData() {
+  let response = await fetch("http://localhost:5500/api/v1/products");
+  let data = await response.json();
+  return data;
+}
+
+async function handleCategory() {
+  const productData = await getData();
+  console.log("productData : ", productData);
+
+  const vegetable = productData.filter((product) => product.category === 1);
+  const fruit = productData.filter((product) => product.category === 5);
+
+  const vegetableCategory = document.querySelector("#vegetable-category");
+  const fruitCategory = document.querySelector("#fruit-category");
+}
+
+// handleCategory();

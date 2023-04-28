@@ -1,7 +1,6 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
-// import { $, $All, addComma } from "../../assets/useful-function.js";
 // 생성한 태그 삽입할 컨테이너
 const container = $("#productContainer");
 const countProduct = $("p");
@@ -24,7 +23,7 @@ fetch(`${http}/api/v1/products`)
     console.log(datas);
     const sortedData = datas.sort((a, b) => b.productId - a.productId);
     insertData(sortedData);
-    findProductId(sortedData);
+    renderProductList(sortedData);
   });
 
 /* html에 상품 정보 삽입하는 함수 */
@@ -65,7 +64,7 @@ function categoryFilter(button, category, findhaveClass, El, willtoggledClass) {
         toggleClass(".font", sortNew, "font");
         const sortedData = dataBox.sort((a, b) => b.productId - a.productId);
         insertData(sortedData);
-        findProductId(sortedData);
+        renderProductList(sortedData);
       });
   });
 }
@@ -106,7 +105,7 @@ const sortData = async (sortedTag, sortFunc) => {
   const foundCategory = await findCategory();
   const sortedData = foundCategory.sort(sortFunc);
   insertData(sortedData);
-  findProductId(sortedData);
+  renderProductList(sortedData);
 };
 
 sortNew.addEventListener("click", () =>
@@ -127,14 +126,25 @@ function addComma(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function findProductId(data) {
+// function findProductId(data) {
+//   const products = $All(".product");
+//   console.log(products.length);
+//   for (let i = 0; i < products.length; i++) {
+//     products[i].addEventListener("click", () => {
+//       const productId = data[i].productId;
+//       console.log(productId);
+//     });
+//     window.location.href = "../product-detail/index.html";
+//   }
+// }
+
+function renderProductList(data) {
   const products = $All(".product");
-  console.log(products.length);
   for (let i = 0; i < products.length; i++) {
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
       console.log(productId);
+      window.location.href = "../product-detail/index.html";
     });
-    window.location.href = "/product-detail/index.html";
   }
 }
