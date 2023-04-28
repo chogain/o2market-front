@@ -57,6 +57,8 @@ fetch(`/api/v1/users/${userId}`, {
     nameInput.value = data.name;
     // passwordInput.value = data.password;
     emailInput.value = data.email;
+    emailInput.setAttribute("readonly", true);
+    emailInput.style.color = "gray";
     phoneInput.value = data.phone;
     addressInput.value = data.address;
   })
