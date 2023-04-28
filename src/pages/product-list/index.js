@@ -8,13 +8,16 @@ const countProduct = $("p");
 const filterTotal = $("#total-btn");
 const filterVegetable = $("#vegetable-btn");
 const filterFruit = $("#fruit-btn");
+const leafBtn = $("#leaf-vegetable-btn");
+const rootBtn = $("#root-vegetable-btn");
+const mushroomBtn = $("#mushroom-btn");
 const sortNew = $("#new-btn");
 const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
-// const http = "http://localhost:5500";
-const http = "";
+const http = "http://localhost:5500";
+// const http = "";
 
 /* DB에 저장된 모든 상품을 불러와 신상품순으로 정렬(기본) */
 fetch(`${http}/api/v1/products`)
@@ -93,8 +96,11 @@ fetch("http://localhost:5500/api/v1/products")
   );
 
 /* 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록 */
-categoryFilter(filterVegetable, 1, ".bg-darkgreen", filterVegetable, "bg-darkgreen");
-categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
+categoryFilter(leafBtn, 1, ".bg-darkgreen", leafBtn, "bg-darkgreen");
+categoryFilter(filterVegetable, 2, ".bg-darkgreen", filterVegetable, "bg-darkgreen");
+categoryFilter(rootBtn, 3, ".bg-darkgreen", rootBtn, "bg-darkgreen");
+categoryFilter(mushroomBtn, 4, ".bg-darkgreen", mushroomBtn, "bg-darkgreen");
+categoryFilter(filterFruit, 5, ".bg-darkgreen", filterFruit, "bg-darkgreen");
 
 async function findCategory() {
   let dataBox;
