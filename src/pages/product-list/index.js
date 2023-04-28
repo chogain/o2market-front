@@ -1,6 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
+// import { $, $All, addComma } from "../../assets/useful-function.js";
 // 생성한 태그 삽입할 컨테이너
 const container = $("#productContainer");
 const countProduct = $("p");
@@ -13,8 +14,8 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
-const http = "http://localhost:5500";
-// const http = "";
+// const http = "http://localhost:5500";
+const http = "";
 
 /* DB에 저장된 모든 상품을 불러와 신상품순으로 정렬(기본) */
 fetch(`${http}/api/v1/products`)
