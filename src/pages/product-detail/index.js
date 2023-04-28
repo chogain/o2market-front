@@ -15,16 +15,15 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-// // 현재 열린 URL에서 뒤에 오는 값을 가져옵니다.
+/* 현재 열린 URL에서 뒤에 오는 값을 가져옵니다. */
 // const productId = window.location.pathname.split("/").pop();
 
-// // 서버에 요청할 API 엔드포인트를 생성합니다.
-// const apiEndpoint = "http://localhost:5500/api/v1/products/64410645ad088180b3542f78";
+const productId = window.location.pathname;
+// const http = "http://localhost:5500";
+const http = "";
 
-// 일단 지정
-const productId = 5;
-// 서버에 GET 요청을 보내서 데이터 가져옴.
-fetch(`http:///api/v1/products/${productId}`)
+/* 서버에 GET 요청을 보내서 데이터 가져옴 */
+fetch(`/api/v1/products${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -79,8 +78,8 @@ fetch(`http:///api/v1/products/${productId}`)
     /* 장바구니 정보 local storage에 등록 */
     $All(".cart-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const url = window.location.href; // 현재 페이지 URL 가져오기
-        const productId = url.substring(url.lastIndexOf("/") + 1);
+        // const url = window.location.href; // 현재 페이지 URL 가져오기
+        // const productId = url.substring(url.lastIndexOf("/") + 1);
 
         let maxIndex = 0;
         let sameProductIndex = -1;
@@ -114,13 +113,7 @@ fetch(`http:///api/v1/products/${productId}`)
         alert("상품이 장바구니에 성공적으로 담겼습니다.");
       });
     });
-  })
-  .catch((error) => {
-    alert(`상품을 장바구니에 담는 것에 실패했습니다.
-다시 시도해주세요.`);
-    console.error("데이터를 받아오는 동안 오류가 발생했습니다.", error);
   });
-
 const order = `
   <section class="order-layout">
   <section class="order-container">
@@ -167,21 +160,22 @@ $All(".payment-btn").forEach((btn) => {
 
     $(".order-product-name").innerHTML = productNameEls[0].innerHTML;
     $(".order-product-count").innerHTML = quantity;
-    $("#sum-all-items").innerHTML = `${addComma(price)}원`;
-    $("#total-price").innerHTML = `${addComma(price + 3000)}원`;
+    $("#sum-all-items").innerHTML = `${addComma(price * quantity)}원`;
+    $("#total-price").innerHTML = `${addComma(price * quantity + 3000)}원`;
 
     $(".close").addEventListener("click", () => {
       $("main").removeChild(orderEl);
     });
 
-    const userId = localStorage.get("userId"); // 주문 조회할 ID
-    const token = localStorage.get("token"); // 사용자 토큰
+    const userId = localStorage.getItem("userId"); // 주문 조회할 ID
+    const token = localStorage.getItem("token"); // 사용자 토큰
     $("#submitButton").addEventListener("click", () => {
       console.log(`quantity: ${quantity}`);
       console.log(`price: ${price}`);
       console.log(`productName: ${productNameEls[0].innerHTML}`);
       console.log(`orderAddr: ${$("#address").value}`);
-      fetch(`http://127.0.0.1:5500/api/v1/orders/${userId}`, {
+      console.log(productId);
+      fetch(`${http}/api/v1/orders/${userId}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -202,10 +196,11 @@ $All(".payment-btn").forEach((btn) => {
         }),
       })
         .then((response) => {
-          // 서버 응답 처리
+          /* 서버 응답 처리 */
           if (response.ok) {
             alert("결재 완료 되었습니다.");
-            window.location.href = "http://127.0.0.1:3000/src/pages/main/index.html";
+            console.log(userId);
+            window.location.href = `${http}/api/v1/orders/${userId}`;
             console.log("결재 완료");
           } else {
             alert(`결재 실패

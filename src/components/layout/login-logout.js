@@ -29,7 +29,7 @@ export function handleLogin() {
 // 로그아웃 클릭 시 처리하는 함수
 export function handleLogout() {
   // 로그아웃 처리 로직
-  localStorage.removeItem("token"); // 토큰 삭제
+  localStorage.clear(); // 토큰 삭제
   checkLoginStatus(); // 로그인 상태 체크
 }
 

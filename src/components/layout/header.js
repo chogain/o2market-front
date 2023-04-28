@@ -1,6 +1,3 @@
-// import checkLoginStatus from "./login-logout.js";
-// checkLoginStatus();
-
 // body 태그 아래 <header id="header"></header> 생성
 export default function Header() {
   const header = document.querySelector("header");
@@ -17,11 +14,11 @@ export default function Header() {
                 <li>
                   <h4>잎채소</h4>
                   <ul>
-                    <!-- <li><a href="../../../src/pages/product-detail/3">양상추</a></li> -->
-                    <li>양배추</li>
-                    <li>시금치</li>
-                    <li>쑥갓</li>
-                    <li>파슬리</li>
+                    <!-- <li><a href="/product/1">양상추</a></li> -->
+                    <li><a href="/product/2">양배추</a></li>
+                    <li><a href="/product/3">시금치</a></li>
+                    <li><a href="/product/4">파슬리</a></li>
+                    <li><a href="/product/5">청경채</a></li>
                   
                   
                   </ul>
@@ -29,23 +26,23 @@ export default function Header() {
                 <li>
                   <h4>열매채소</h4>
                   <ul>
-                    <li>파프리카</li>
-                    <li>가지</li>
-                    <li>청피망</li>
-                    <li>홍고추</li>
-                    <li>고추</li>
-                    <li>완두콩</li>
+                    <li><a href="/product/10">파프리카</a></li>
+                    <li><a href="/product/11">가지</a></li>
+                    <li><a href="/product/12">청피망</a></li>
+                    <li><a href="/product/13">홍고추</a></li>
+                    <li><a href="/product/14">고추</a></li>
+                    <li><a href="/product/15">완두콩</a></li>
                     
                   </ul>
                 </li>
                 <li>
                   <h4>뿌리채소</h4>
                   <ul>
-                    <li>양파</li>
-                    <li>자색양파</li>
-                    <li>통마늘</li>
-                    <li>새척당근</li>
-                    <li>고구마</li>
+                    <li><a href="/product/5">양파</a></li>
+                    <li><a href="/product/5">자색양파</a></li>
+                    <li><a href="/product/5">통마늘</a></li>
+                    <li><a href="/product/5">새척당근</a></li>
+                    <li><a href="/product/5">고구마</a></li>
               
 
                   </ul>
@@ -53,10 +50,10 @@ export default function Header() {
                 <li>
                   <h4>버섯</h4>
                   <ul>
-                    <li>양송이버섯</li>
-                    <li>표고버섯</li>
-                    <li>새송이버섯</li>
-                    <li>팽이버섯</li>
+                    <li><a href="/product/5">양송이버섯</a></li>
+                    <li><a href="/product/5">표고버섯</a></li>
+                    <li><a href="/product/5">새송이섯</a></li>
+                    <li><a href="/product/5">팽이버섯</a></li>
                   </ul>
                 </li>
               </ul>
@@ -71,21 +68,21 @@ export default function Header() {
                 <li>
                   <h4>생과일</h4>
                   <ul>
-                    <li>블루베리</li>
-                    <li>오렌지</li>
-                    <li>토마토</li>
-                    <li>천도복숭아</li>
-                    <li>키위</li>
+                    <li><a href="/product/5">블루베리</a></li>
+                    <li><a href="/product/5">오렌지</a></li>
+                    <li><a href="/product/5">토마토</a></li>
+                    <li><a href="/product/5">천도복숭아</a></li>
+                    <li><a href="/product/5">키위</a></li>
                   </ul>
                 </li>
                 <li>
                   <h4>열대 과일</h4>
                   <ul>
-                    <li>납작복숭아</li>
-                    <li>메론</li>
-                    <li>바나나</li>
-                    <li>아보카도</li>
-                    <li>체리</li>
+                    <li><a href="/product/5">납작복숭아</a></li>
+                    <li><a href="/product/5">메론</a></li>
+                    <li><a href="/product/5">바나나</a></li>
+                    <li><a href="/product/5">아보카도</a></li>
+                    <li><a href="/product/5">체리</a></li>
                   </ul>
                 </li>
               </ul>
@@ -106,7 +103,7 @@ export default function Header() {
             <a href="../../pages/login/index.html" id="login-btn" >로그인</a>
           </li>
           <li>
-            <a href="../../pages/myPage/index.html">마이페이지</a>
+            <a href="../../pages/myPage/index.html" id="myPage-btn">마이페이지</a>
           </li>
           <li>
             <a href="../../pages/cart/index.html">장바구니</a>
