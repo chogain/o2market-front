@@ -15,10 +15,8 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-const http = "http://localhost:5500";
-// const productId = "/5";
-
-// const http = "";
+// const http = "http://localhost:5500";
+const http = "";
 
 const queryString = window.location.search;
 
@@ -36,9 +34,6 @@ fetch(`${http}/api/v1/products/${productId}`)
     const description = datas.description;
     const price = datas.price;
     const company = datas.company;
-    // 지금 이렇게 하면 index.html 나와서 주석처리 함
-    // const productId = document.location.href.split("/");
-    console.log(productId);
 
     /* 동일한 클래스를 가진 태그에 동일한 데이터 삽입 */
     PutSameValueinSameClass(imgEls, `<img src="${imgUri}" alt="${productName}">`);
