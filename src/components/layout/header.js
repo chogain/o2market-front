@@ -86,7 +86,7 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-        <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
+        <a href="../../pages/product-detail/index.html?productId=${vegetable.productId} ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -99,7 +99,9 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?productId=${
+           vegetable.productId
+         } ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -112,7 +114,9 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?productId=${
+           vegetable.productId
+         } ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -125,7 +129,9 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?productId=${
+           vegetable.productId
+         } ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -138,7 +144,7 @@ export default async function Header() {
     (fruit) =>
       `
       <li>
-        <a href="../../pages/product-detail/index.html?${fruit.productId}">
+        <a href="../../pages/product-detail/index.html?productId=${fruit.productId}">
           ${fruit.productName.match(/^\D+/)}
         </a>
       </li>
