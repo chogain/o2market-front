@@ -1,8 +1,8 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
-const http = "http://localhost:5500";
-// const http = "";
+// const http = "http://localhost:5500";
+const http = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = $(".add-order");
@@ -241,12 +241,10 @@ document.addEventListener("DOMContentLoaded", function () {
           }),
         })
           .then((response) => {
-            alert(token);
             /* 서버 응답 처리 */
             if (response.ok) {
               alert("결재 완료 되었습니다.");
-              alert(token);
-              // window.location.href = `${http}/pages/orderCompleted${userId}`;
+              window.location.href = "../orderCompleted/index.html";
               console.log("결재 완료");
             } else {
               alert(`결재 실패
