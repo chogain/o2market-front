@@ -10,7 +10,7 @@ export default function Header() {
       
       <ul class="main-menu">
         <li class="item">
-          <div class="item__name vegetable">채소</div>
+          <div class="item__name vegetable">  <a href="../../pages/product-list">채소</a></div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
@@ -64,7 +64,7 @@ export default function Header() {
           </div>
         </li>
         <li class="item">
-          <div class="item__name fruit">과일</div>
+          <div class="item__name fruit"><a href="../../pages/product-list">과일</a></div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
@@ -96,8 +96,9 @@ export default function Header() {
       
       <h1 class="logo">
         <span class="material-symbols-outlined">spo2</span>
-        <a href="/" class="title">O2마켓</a>
+        <a href="../../pages/main/index.html" class="title">O2마켓</a>
       </h1>
+      
 
       <div class="sub-menu">
         <ul class="menu">

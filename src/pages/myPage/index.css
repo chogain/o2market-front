@@ -139,7 +139,7 @@
   width: 600px;
   min-height: 400px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; /* flex-direction을 column으로 변경 */
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -152,16 +152,16 @@
   background-color: white;
   border: 1px solid black;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column; /* flex-direction을 column으로 변경 */
+  justify-content: center; /* justify-content를 center로 변경 */
+  align-items: center; /* align-items를 center로 변경 */
   padding: 10px;
   border-radius: 10px;
 }
 
 #orderStateDiv > div button {
   width: 100px;
-  margin-left: 20px;
+  margin: 10px 0; /* 버튼을 상하 중앙으로 위치시키기 위해 margin을 수정 */
 }
 
 #orderStateDiv > div .changeDiv {
@@ -177,6 +177,7 @@
 #orderStateDiv h2 {
   display: flex;
   justify-content: center;
+  align-items: center; /* h2 요소도 가운데에 위치하게 align-items를 추가 */
   margin-bottom: 20px;
 }
 
@@ -188,6 +189,25 @@
   margin-bottom: 1.33em;
   margin-left: 0;
   margin-right: 0;
+}
+
+#deleteOrderButton {
+  display: none;
+  margin-bottom: 15px;
+}
+
+#orderStateDiv ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#orderStateDiv li {
+  background-color: #fefeea;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 /************* 주문/배송 끝 *****************/
