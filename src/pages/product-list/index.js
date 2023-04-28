@@ -13,8 +13,8 @@ const sortHighPrice = $("#higt-price-btn");
 const sortLowPrice = $("#low-price-btn");
 const sortABC = $("#abc-btn");
 
-const http = "http://localhost:5500";
-// const htt/
+// const http = "http://localhost:5500";
+const http = "";
 
 /* DB에 저장된 모든 상품을 불러와 신상품순으로 정렬(기본) */
 fetch(`${http}/api/v1/products`)
@@ -80,6 +80,17 @@ function categoryData(category) {
       return dataBox;
     });
 }
+
+// 전체버튼 클릭시 이벤트 등록
+fetch("http://localhost:5500/api/v1/products")
+  .then((res) => res.json())
+  .then((datas) =>
+    filterTotal.addEventListener("click", () => {
+      toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
+      toggleClass(".font", sortNew, "font");
+      insertData(datas);
+    }),
+  );
 
 /* 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록 */
 categoryFilter(filterVegetable, 1, ".bg-darkgreen", filterVegetable, "bg-darkgreen");

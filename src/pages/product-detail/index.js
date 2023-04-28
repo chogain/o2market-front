@@ -15,14 +15,10 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-// const http = "http://localhost:5500";
+const http = "http://localhost:5500";
 // const productId = "/5";
 
-const http = "";
-// const pathArray = window.location.pathname.substring(1).split("/");
-// const productId = window.location.search;
-// pathArray[pathArray.length - 1];
-// // const productId = window.location.pathname.substring(1);
+// const http = "";
 
 const queryString = window.location.search;
 
