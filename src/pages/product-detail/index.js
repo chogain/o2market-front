@@ -18,16 +18,17 @@ let count = parseInt(countEls[0].textContent);
 /* 현재 열린 URL에서 뒤에 오는 값을 가져옵니다. */
 // const productId = window.location.pathname.split("/").pop();
 
-// const productId = window.location.pathname;
-const http = "http://localhost:5500";
-const productId = "/5";
-// const http = "";
+// const http = "http://localhost:5500";
+// const productId = "/5";
+
+const http = "";
+const productId = window.location.pathname;
 
 //localhost:5500/api/v1/products/5
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
-// fetch(`${http}/pages/product-detail${productId}`)
-// fetch(`${http}/api/v1/products$
 fetch(`${http}/api/v1/products${productId}`)
+  // fetch(`${http}/api/v1/products$
+  // fetch(`${http}/api/v1/products${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -179,7 +180,8 @@ $All(".payment-btn").forEach((btn) => {
       console.log(`productName: ${productNameEls[0].innerHTML}`);
       console.log(`orderAddr: ${$("#address").value}`);
       console.log(productId);
-      fetch(`${http}/pages/product-detail${productId}`, {
+      console.log(userId);
+      fetch(`${http}/api/v1/orders/${userId}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -188,7 +190,7 @@ $All(".payment-btn").forEach((btn) => {
         body: JSON.stringify({
           orderItems: [
             {
-              productId: productId,
+              productId: productId.substring(1),
               quantity: quantity,
               price: price,
               productName: productNameEls[0].innerHTML,
@@ -204,7 +206,7 @@ $All(".payment-btn").forEach((btn) => {
           if (response.ok) {
             alert("결재 완료 되었습니다.");
             console.log(userId);
-            window.location.href = `${http}/api/v1/orders/${userId}`;
+            window.location.href = "../orderCompleted/index.html";
             console.log("결재 완료");
           } else {
             alert(`결재 실패
