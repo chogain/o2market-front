@@ -1,7 +1,8 @@
 const $ = (selector) => document.querySelector(selector);
 const $All = (selector) => document.querySelectorAll(selector);
 
-const http = "http://localhost:5500";
+// const http = "http://localhost:5500";
+const http = "";
 
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = $(".add-order");
@@ -241,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
             /* 서버 응답 처리 */
             if (response.ok) {
               alert("결재 완료 되었습니다.");
-              window.location.href = "http://localhost:5500/api/v1/orders/${userId}";
+              window.location.href = "/api/v1/orders/${userId}";
               console.log("결재 완료");
             } else {
               alert(`결재 실패
