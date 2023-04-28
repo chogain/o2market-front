@@ -22,6 +22,7 @@ export function onLoad() {
       window.location.href = "../../pages/main/index.html";
     }
   } else {
+    myPageBtn.style.display = "none";
     if (window.location.pathname.includes("myPage")) {
       window.location.href = "../../pages/main/index.html";
     }
