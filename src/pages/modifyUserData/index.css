@@ -1,3 +1,5 @@
+/************* 공통 css *****************/
+
 #headerOne {
   display: flex;
   justify-content: center;
@@ -6,15 +8,17 @@
   margin: 0.67em 0;
 }
 
+/************* 회원가입 css *****************/
 .holeMemberFormDiv {
   display: flex;
   justify-content: center;
-  margin: 80px;
+  margin-top: 80px;
 }
 
 .memberFormDiv {
-  margin: 90px;
+  /* background-color: rgb(171, 245, 170); */
   width: 450px;
+  margin: 90px;
 }
 
 .memberFormDiv h1 {
@@ -23,7 +27,7 @@
 }
 
 .memberFormDiv input {
-  margin-bottom: 20px;
+  margin: 10px 50px 10px 0px;
   height: 50px;
   width: 350px;
   border-radius: 5px;
@@ -33,19 +37,18 @@
 
 .memberFormDiv input:last-child {
   background-color: #7fab4dbb;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .memberForm {
-  margin-left: 90px;
+  margin-left: 50px;
 }
 
 .joinBtn {
-  margin-left: 50px;
-  margin-bottom: 69px;
+  margin: 0px 0px 10px 125px;
   height: 50px;
-  width: 350px;
+  width: 200px;
   border-radius: 5px;
   border: 0px;
-  background-color: #7fab4dbb;
+  background-color: rgb(209, 224, 245);
 }
