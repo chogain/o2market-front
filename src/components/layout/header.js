@@ -86,7 +86,7 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-        <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+        <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -99,7 +99,7 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -112,7 +112,7 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -125,7 +125,7 @@ export default async function Header() {
     (vegetable) =>
       `
       <li>
-         <a href="../../pages/product-detail/index.html/${vegetable.productId} ">
+         <a href="../../pages/product-detail/index.html?${vegetable.productId} ">
           ${vegetable.productName.match(/^\D+/)}
         </a>
       </li>
@@ -138,7 +138,7 @@ export default async function Header() {
     (fruit) =>
       `
       <li>
-        <a href="../../pages/product-detail/index.html/${fruit.productId}">
+        <a href="../../pages/product-detail/index.html?${fruit.productId}">
           ${fruit.productName.match(/^\D+/)}
         </a>
       </li>
@@ -152,16 +152,3 @@ async function getData() {
   let data = await response.json();
   return data;
 }
-
-async function handleCategory() {
-  const productData = await getData();
-  console.log("productData : ", productData);
-
-  const vegetable = productData.filter((product) => product.category === 1);
-  const fruit = productData.filter((product) => product.category === 5);
-
-  const vegetableCategory = document.querySelector("#vegetable-category");
-  const fruitCategory = document.querySelector("#fruit-category");
-}
-
-// handleCategory();
