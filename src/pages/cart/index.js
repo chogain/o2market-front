@@ -7,18 +7,22 @@ const http = "";
 document.addEventListener("DOMContentLoaded", function () {
   const itemContainer = $(".add-order");
   let resultPrice = 0;
+
+  /* 장바구니 상품들 로컬스토리지에서 불러옴 */
   for (let i = 0; i < localStorage.length; i++) {
     try {
       const cartItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      /* 로컬 스토리지에 장바구니가 아닌 다른 정보가 있을 경우 예외처리 */
       if (!cartItem.productName) {
         return false;
       }
+      /* 불러온 장바구니 상품들 HTML에 삽입 */
       itemContainer.insertAdjacentHTML(
         "beforeend",
         `
       <article class="add-cart">
         <input type="checkbox" class="checking" checked />
-        <span class="product">${cartItem.productName}(${cartItem.productId})</span>
+        <span class="product">${cartItem.productName}</span>
         <span class="price">${cartItem.price}</span>
         <div class="count-box">
           <div class="minus">-</div>
@@ -91,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  /* 전체 체크박스 토글 */
   const toggleAll = $(".all-select-text");
   const checkboxes = $All('input[type="checkbox"]');
 
@@ -108,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  /* 체크한 상품 삭제 */
   const deleteBtn = $("#delete-btn");
 
   deleteBtn.addEventListener("click", () => {
@@ -139,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  /* 구매하기 버튼 클릭시 삽입할 주문창 */
   const order = `
     <section class="order-layout">
     <section class="order-container">
@@ -164,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </section>
     `;
 
+  /* 로컬 스토리지에서 장바구니에 담은 상품 가져오기 */
   const orderItems = [];
   for (let i = 0; i < localStorage.length; i++) {
     const orderCount = $All(".count")[1].innerHTML;
@@ -174,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const rawData = localStorage.getItem(key);
       let data = JSON.parse(rawData);
-      console.log(data.id);
       let orderItem = {
         productId: Number(data.id),
         quantity: Number(orderCount),
@@ -188,8 +195,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /* 클릭 시 결제창 띄움 */
   $(".button").addEventListener("click", () => {
-    /* 모든 체크박스가 체크되어있지 않으면 결재할 수 없음 */
+    /* 모든 체크박스가 체크되어있지 않으면 결제할 수 없음 */
     const checkboxes = $All('input[type="checkbox"]');
     let allChecked = true;
     for (let i = 0; i < checkboxes.length; i++) {
@@ -210,23 +218,17 @@ document.addEventListener("DOMContentLoaded", function () {
       $("main").append(orderEl);
       $("#order-sum-all-items").innerHTML = $("#sum-all-items").innerHTML;
       $("#order-total-price").innerHTML = $("#total-price").innerHTML;
-      const userId = localStorage.getItem("userId"); // 주문 조회할 ID
-      const token = localStorage.getItem("token"); // 사용자 토큰
-      alert(token);
+      /* 결제창 닫기 */
       $(".close").addEventListener("click", () => {
         $("main").removeChild(orderEl);
       });
 
+      /* 유저 정보 로컬 스토리지에서 가져옴 */
+      const userId = localStorage.getItem("userId"); // 주문 조회할 ID
+      const token = localStorage.getItem("token"); // 사용자 토큰
+
+      /* 결제하기 버튼 누르면 해당 데이터 db 전송 */
       $("#order-submit-button").addEventListener("click", () => {
-        // console.log(
-        //   JSON.stringify({
-        //     orderItems: orderItems,
-        //     orderAddr: $("#address").value,
-        //     deliveryState: 0,
-        //     deleteFlag: false,
-        //   }),
-        // );
-        // alert(token);
         fetch(`${http}/api/v1/orders/${userId}`, {
           method: "POST",
           headers: {
@@ -249,13 +251,13 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
               alert(`결재 실패
     다시 시도해 주세요.`);
-              console.error("결재 실패:", response.statusText);
+              console.error("결제 실패:", response.statusText);
             }
           })
           .catch((error) => {
             alert(`결재 실패
     다시 시도해 주세요.`);
-            console.error("결재 실패:", error);
+            console.error("서버 응답 실패:", error);
           });
       });
     }

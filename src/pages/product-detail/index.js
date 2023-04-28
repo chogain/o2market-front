@@ -15,20 +15,14 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-/* 현재 열린 URL에서 뒤에 오는 값을 가져옵니다. */
-// const productId = window.location.pathname.split("/").pop();
-
 const http = "http://localhost:5500";
-const productId = "/5";
+// const productId = "/5";
 
 // const http = "";
-// const productId = window.location.pathname.substring(1);
+const productId = window.location.pathname.substring(1);
 
-//localhost:5500/api/v1/products/5
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
 fetch(`${http}/api/v1/products/${productId}`)
-  // fetch(`${http}/api/v1/products$
-  // fetch(`${http}/api/v1/products${productId}`)
   .then((response) => response.json())
   .then((datas) => {
     /* 상품 정보 할당 */
@@ -41,6 +35,7 @@ fetch(`${http}/api/v1/products/${productId}`)
     // const productId = document.location.href.split("/");
     console.log(productId);
 
+    /* 동일한 클래스를 가진 태그에 동일한 데이터 삽입 */
     PutSameValueinSameClass(imgEls, `<img src="${imgUri}" alt="${productName}">`);
     PutSameValueinSameClass(productNameEls, productName);
     PutSameValueinSameClass(priceEls, addComma(price));
@@ -119,6 +114,8 @@ fetch(`${http}/api/v1/products/${productId}`)
       });
     });
   });
+
+/* 상품 정보 form */
 const order = `
   <section class="order-layout">
   <section class="order-container">
@@ -150,6 +147,7 @@ const order = `
   </section>
   `;
 
+/* 모든 구매하기 버튼 클릭 시 구매 정보 DB에 전송 */
 $All(".payment-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     window.scrollTo({
@@ -175,12 +173,6 @@ $All(".payment-btn").forEach((btn) => {
     const userId = localStorage.getItem("userId"); // 주문 조회할 ID
     const token = localStorage.getItem("token"); // 사용자 토큰
     $("#submitButton").addEventListener("click", () => {
-      console.log(`quantity: ${quantity}`);
-      console.log(`price: ${price}`);
-      console.log(`productName: ${productNameEls[0].innerHTML}`);
-      console.log(`orderAddr: ${$("#address").value}`);
-      console.log(productId);
-      console.log(userId);
       fetch(`${http}/api/v1/orders/${userId}`, {
         method: "POST",
         headers: {
@@ -205,7 +197,6 @@ $All(".payment-btn").forEach((btn) => {
           /* 서버 응답 처리 */
           if (response.ok) {
             alert("결재 완료 되었습니다.");
-            console.log(userId);
             window.location.href = "../orderCompleted/index.html";
             console.log("결재 완료");
           } else {
@@ -217,7 +208,7 @@ $All(".payment-btn").forEach((btn) => {
         .catch((error) => {
           alert(`결재 실패
 다시 시도해 주세요.`);
-          console.error("결재 실패:", error);
+          console.error("서버 응답 실패:", error);
         });
     });
   });
