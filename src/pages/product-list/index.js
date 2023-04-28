@@ -81,6 +81,16 @@ function categoryData(category) {
     });
 }
 
+// 전체버튼 클릭시 이벤트 등록
+fetch("http://localhost:5500/api/v1/products")
+  .then((res) => res.json())
+  .then((datas) =>
+    filterTotal.addEventListener("click", () => {
+      toggleClass(".bg-darkgreen", filterTotal, "bg-darkgreen");
+      insertData(datas);
+    }),
+  );
+
 /* 카테고리 클릭 시 해당하는 데이터만 필터링하는 이벤트 등록 */
 categoryFilter(filterVegetable, 1, ".bg-darkgreen", filterVegetable, "bg-darkgreen");
 categoryFilter(filterFruit, 2, ".bg-darkgreen", filterFruit, "bg-darkgreen");
@@ -144,7 +154,7 @@ function renderProductList(data) {
     products[i].addEventListener("click", () => {
       const productId = data[i].productId;
       console.log(productId);
-      window.location.href = `../product-detail/index.html?${productId}`;
+      window.location.href = `../product-detail/index.html?productId=${productId}`;
     });
   }
 }

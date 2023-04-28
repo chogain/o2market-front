@@ -367,3 +367,10 @@ dl > .text {
   padding: 10px;
   font-size: 20px;
 }
+
+.description {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  margin: 30px 0;
+}

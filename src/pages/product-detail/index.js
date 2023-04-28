@@ -15,19 +15,14 @@ const totalPriceEls = $All(".total-price");
 /* 구매 수량 */
 let count = parseInt(countEls[0].textContent);
 
-// const productId = "/5";
-
 // const http = "http://localhost:5500";
 const http = "";
 
-const pathArray = window.location.search.split("?");
-const productId = pathArray[pathArray.length - 1];
+const queryString = window.location.search;
 
-async function getData(productId) {
-  let response = await fetch(`/api/v1/products/${productId}`);
-  let data = await response.json();
-  return data;
-}
+// // Further parsing:
+const params = new URLSearchParams(queryString);
+const productId = parseInt(params.get("productId"));
 
 /* 서버에 GET 요청을 보내서 데이터 가져옴 */
 const datas = await getData(productId);
